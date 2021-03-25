@@ -2,8 +2,13 @@
 
 package main
 
-import "fmt"
+import (
+	"github.com/webmalc/vishleva-backend/common/config"
+	"github.com/webmalc/vishleva-backend/common/logger"
+)
 
 func main() {
-	fmt.Println("init")
+	config.Setup()
+	log := logger.NewLogger()
+	log.Info("init")
 }
