@@ -1,0 +1,117 @@
+linters-settings:
+  depguard:
+    list-type: blacklist
+  dupl:
+    threshold: 100
+  funlen:
+    lines: 100
+    statements: 50
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    # disabled-checks:
+    #   - dupImport # https://github.com/go-critic/go-critic/issues/845
+    #   - ifElseChain
+    #   - octalLiteral
+    #   - whyNoLint
+    #   - wrapperFunc
+  gocyclo:
+    min-complexity: 15
+  goimports:
+    local-prefixes: github.com/golangci/golangci-lint
+  golint:
+    min-confidence: 0
+  gomnd:
+    settings:
+      mnd:
+        checks: argument,case,condition,return
+  lll:
+    line-length: 80
+  maligned:
+    suggest-new: true
+  misspell:
+    locale: US
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - funlen
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - golint
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - interfacer
+    - lll
+    - misspell
+    - nakedret
+    - rowserrcheck
+    - scopelint
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+    - godox
+    - maligned
+    - gocognit
+    - gochecknoglobals
+    - gochecknoinits
+    # - prealloc
+    # - wsl
+
+issues:
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    - path: .*admin/bindatafs/.*
+      linters:
+        - errcheck
+        - lll
+        - godox
+        - gosec
+        - gofmt
+        - gosec
+        - gochecknoglobals
+        - gocognit
+        - gochecknoinits
+        - goconst
+        - golint
+        - gosimple
+    - path: _test\.go
+      linters:
+        - gomnd
+    - path: app_test\.go
+      linters:
+        - gomnd
+        - dupl
+        - gocritic
+    - linters:
+        - lll
+      source: "`.*"
+# run:
+#   skip-dirs:
+#     - test/testdata_etc
