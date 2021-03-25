@@ -1,0 +1,4 @@
+log_path: logs/app.log
+is_prod: true
+database_type: postgres
+database_uri: host=vishleva-backend-postgres port=5432 user=postgres dbname=vishleva_backend password=postgres sslmode=disable
