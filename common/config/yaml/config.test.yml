@@ -1,4 +1,5 @@
 log_path: logs/app.test.log
+server_log_path: logs/server.test.log
 is_prod: false
 database_type: sqlite3
-database_uri: ':memory:'
+database_uri: ":memory:"

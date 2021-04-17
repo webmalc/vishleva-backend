@@ -1,5 +1,5 @@
 # Go parameters
-.PHONY:  testall test testl testv coverage threshold lint run depgraph
+.PHONY:  testall test testl testv coverage threshold lint run depgraph install_admin
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
@@ -7,8 +7,8 @@ GORUN=$(GOCMD) run .
 GOCOV=$(GOCMD) tool cover -html=coverage.out
 GOTEST=$(GOCMD) test -tags test
 GOGET=$(GOCMD) get
-GODEP=godepgraph -s -o  github.com/webmalc/it-stats-rankings-scrapper github.com/webmalc/it-stats-rankings-scrapper | dot -Tpng -o godepgraph.png
-BINARY_NAME=its-rankings.app
+GODEP=godepgraph -s -o  github.com/webmalc/vishleva-backend github.com/webmalc/vishleva-backend | dot -Tpng -o godepgraph.png
+BINARY_NAME=vishleva_backend.app
 
 all: build
 
@@ -28,7 +28,7 @@ coverage:
 	$(GOCOV)
 
 threshold:
-	overcover --coverprofile coverage.out --threshold 90 --summary
+	overcover --coverprofile coverage.out --threshold 85 --summary
 testl: testv lint
 
 testall: test lint threshold
@@ -37,8 +37,14 @@ clean:
 	$(GOCLEAN)
 	rm -f $(BINARY_NAME)
 
+install_admin:
+	GO111MODULE=off $(GOCMD) get -u -f github.com/qor/bindatafs/...
+	GO111MODULE=off $(GOCMD) get -u -f github.com/qor/admin
+
 lint:
 	golangci-lint run ./...
 	golint ./...
+
 run:
-	$(GORUN)
+	$(GORUN) $(c)
+

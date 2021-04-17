@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"context"
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -10,16 +12,16 @@ type CommandRouter struct {
 	logger          ErrorLogger
 	rootCmd         *cobra.Command
 	config          *Config
-	adminRunner     Runner
+	serverRunner    ContextRunner
 	bindatafsRunner Runner
 }
 
-// admin runs admin server.
-func (r *CommandRouter) admin(cmd *cobra.Command, args []string) {
-	r.adminRunner.Run(args)
+// admin runs the server.
+func (r *CommandRouter) server(cmd *cobra.Command, args []string) {
+	r.serverRunner.Run(context.Background(), args)
 }
 
-// bindatafs runs bindatafs generator.
+// bindatafs runs the bindatafs generator.
 func (r *CommandRouter) bindatafs(cmd *cobra.Command, args []string) {
 	r.bindatafsRunner.Run(args)
 }
@@ -28,9 +30,9 @@ func (r *CommandRouter) bindatafs(cmd *cobra.Command, args []string) {
 func (r *CommandRouter) Run() {
 	r.rootCmd.AddCommand(
 		&cobra.Command{
-			Use:   "admin",
-			Short: "Run the admin",
-			Run:   r.admin,
+			Use:   "server",
+			Short: "Run the server",
+			Run:   r.server,
 		},
 		&cobra.Command{
 			Use:   "bindatafs",
@@ -46,14 +48,14 @@ func (r *CommandRouter) Run() {
 
 // NewCommandRouter creates a new CommandRouter.
 func NewCommandRouter(
-	log ErrorLogger, admin, bindata Runner,
+	log ErrorLogger, server ContextRunner, bindata Runner,
 ) CommandRouter {
 	config := NewConfig()
 	return CommandRouter{
 		config:          config,
 		logger:          log,
-		rootCmd:         &cobra.Command{Use: "its-rankings.app"},
-		adminRunner:     admin,
+		rootCmd:         &cobra.Command{Use: "vishleva_backend.app"},
+		serverRunner:    server,
 		bindatafsRunner: bindata,
 	}
 }
