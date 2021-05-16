@@ -67,6 +67,9 @@ func TestServer_setEngine(t *testing.T) {
 }
 
 func TestServer_Run(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping testing in short mode")
+	}
 	l := &mocks.InfoLogger{}
 	conn := db.NewConnection()
 	a := admin.NewAdmin(conn.DB)

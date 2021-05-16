@@ -5,7 +5,7 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GORUN=$(GOCMD) run .
 GOCOV=$(GOCMD) tool cover -html=coverage.out
-GOTEST=$(GOCMD) test -tags test
+GOTEST=$(GOCMD) test -tags test -short
 GOGET=$(GOCMD) get
 GODEP=godepgraph -s -o  github.com/webmalc/vishleva-backend github.com/webmalc/vishleva-backend | dot -Tpng -o godepgraph.png
 BINARY_NAME=vishleva_backend.app

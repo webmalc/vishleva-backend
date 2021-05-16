@@ -64,7 +64,7 @@ func (s *Server) setEngine() {
 	s.engine.Use(cors.New(s.getCORS()))
 }
 
-// Run runs the admin
+// Run runs the server
 func (s *Server) Run(ctx context.Context, args []string) {
 	s.setEngine()
 	httpServer := &http.Server{
