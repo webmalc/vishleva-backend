@@ -15,7 +15,7 @@ func setDefaults() {
 	d := "host=localhost port=5432 "
 	d += "user=postgres dbname=vishleva_backend password=postgres"
 	viper.SetDefault("database_uri", d)
-	viper.SetDefault("database_type", d)
+	viper.SetDefault("database_type", "postgres")
 }
 
 // NewConfig returns the configuration object.

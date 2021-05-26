@@ -15,7 +15,11 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/qor/admin v0.0.0-20200908023436-0c0a0b041c88
 	github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14
-	github.com/qor/qor v0.0.0-20200729071734-d587cffbbb93 // indirect
+	github.com/qor/auth v0.0.0-20200821034127-11d4c974507d
+	github.com/qor/auth_themes v0.0.0-20190103025702-000e8ac9b42d
+	github.com/qor/cache v0.0.0-20171031031927-c9d48d1f13ba // indirect
+	github.com/qor/i18n v0.0.0-20181014061908-f7206d223bcd // indirect
+	github.com/qor/qor v0.0.0-20200729071734-d587cffbbb93
 	github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
 	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/afero v1.4.0 // indirect
@@ -26,6 +30,7 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/objx v0.3.0 // indirect
 	github.com/stretchr/testify v1.7.0
+	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	golang.org/x/net v0.0.0-20200927032502-5d4f70055728 // indirect
 	golang.org/x/sys v0.0.0-20200928205150-006507a75852 // indirect
 	gopkg.in/ini.v1 v1.61.0 // indirect
