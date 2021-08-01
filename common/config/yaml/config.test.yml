@@ -3,3 +3,9 @@ server_log_path: logs/server.test.log
 is_prod: false
 database_type: sqlite3
 database_uri: ":memory:"
+secret: secret_password_test
+
+#paths
+admin_path: "admin"
+login_path: "/auth/login"
+logout_path: "/auth/logout"

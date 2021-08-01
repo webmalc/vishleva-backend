@@ -1,6 +1,7 @@
 package server
 
 import (
+	"os"
 	"testing"
 	"time"
 
@@ -24,5 +25,8 @@ func TestNewConfig(t *testing.T) {
 
 // Setups the tests
 func TestMain(m *testing.M) {
+	if err := os.Chdir("../"); err != nil {
+		panic(err)
+	}
 	test.Run(m)
 }

@@ -1,14 +1,13 @@
 package server
 
-import "net/http"
+import "github.com/gin-gonic/gin"
 
 // InfoLogger logs errors.
 type InfoLogger interface {
 	Infof(format string, args ...interface{})
 }
 
-// Admin is the admin interface
-type Admin interface {
-	Mount() *http.ServeMux
-	GetBasePath() string
+// Router is the router interface
+type Router interface {
+	BindRoutes(e *gin.Engine)
 }

@@ -12,3 +12,9 @@ func HashPassword(pwd []byte) ([]byte, error) {
 	}
 	return bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
 }
+
+// CheckPassword is a simple utility function to check the password given as raw
+// against the user's hashed password
+func CheckPassword(hash []byte, password string) bool {
+	return bcrypt.CompareHashAndPassword(hash, []byte(password)) == nil
+}

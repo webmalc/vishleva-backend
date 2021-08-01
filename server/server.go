@@ -4,36 +4,35 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"io/fs"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
+	"github.com/webmalc/vishleva-backend/common/session"
 )
 
 // Server is the HTTP server structure
 type Server struct {
-	logger InfoLogger
-	config *Config
-	admin  Admin
-	engine *gin.Engine
-}
-
-// mountAdmin mount the admin
-func (s *Server) mountAdmin() {
-	s.engine.Any(
-		fmt.Sprintf("/%s/*resources", s.admin.GetBasePath()),
-		gin.WrapH(s.admin.Mount()),
-	)
+	logger           InfoLogger
+	config           *Config
+	router           Router
+	engine           *gin.Engine
+	session          *session.Session
+	loggerPermission int
 }
 
 // initLogger setups the logger
 func (s *Server) initLogger() {
 	file, err := os.OpenFile(
-		s.config.ServerLogPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600,
+		s.config.ServerLogPath,
+		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+		fs.FileMode(s.loggerPermission),
 	)
 	if err != nil {
 		panic(errors.Wrap(err, "logger"))
@@ -60,7 +59,9 @@ func (s *Server) setEngine() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	s.engine = gin.Default()
-	s.mountAdmin()
+	s.engine.Use(sessions.Sessions(s.session.Name, s.session.Store))
+	s.engine.LoadHTMLGlob("templates/*/*")
+	s.router.BindRoutes(s.engine)
 	s.engine.Use(cors.New(s.getCORS()))
 }
 
@@ -101,8 +102,14 @@ func (s *Server) Run(ctx context.Context, args []string) {
 }
 
 // NewServer returns a new server object
-func NewServer(a Admin, l InfoLogger) *Server {
+func NewServer(router Router, l InfoLogger, s *session.Session) *Server {
 	config := NewConfig()
-	s := Server{config: config, admin: a, logger: l}
-	return &s
+	server := Server{
+		config:           config,
+		logger:           l,
+		router:           router,
+		session:          s,
+		loggerPermission: 0600,
+	}
+	return &server
 }

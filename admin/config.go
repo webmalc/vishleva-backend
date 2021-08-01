@@ -6,7 +6,9 @@ import (
 
 // Config is the admin configuration struct.
 type Config struct {
-	AdminPath string
+	AdminPath  string
+	LoginPath  string
+	LogoutPath string
 }
 
 // setDefaults sets the default values
@@ -18,7 +20,9 @@ func setDefaults() {
 func NewConfig() *Config {
 	setDefaults()
 	config := &Config{
-		AdminPath: viper.GetString("admin_path"),
+		AdminPath:  viper.GetString("admin_path"),
+		LoginPath:  viper.GetString("login_path"),
+		LogoutPath: viper.GetString("logout_path"),
 	}
 	return config
 }

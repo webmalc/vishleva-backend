@@ -9,7 +9,11 @@ import (
 	"github.com/webmalc/vishleva-backend/common/config"
 	"github.com/webmalc/vishleva-backend/common/db"
 	"github.com/webmalc/vishleva-backend/common/logger"
+	"github.com/webmalc/vishleva-backend/common/session"
+	"github.com/webmalc/vishleva-backend/handlers"
 	"github.com/webmalc/vishleva-backend/models"
+	"github.com/webmalc/vishleva-backend/repositories"
+	"github.com/webmalc/vishleva-backend/routes"
 	"github.com/webmalc/vishleva-backend/server"
 )
 
@@ -17,8 +21,14 @@ func main() {
 	config.Setup()
 	log := logger.NewLogger()
 	conn := db.NewConnection()
+	sessionConfig := session.NewSession()
+	userRepository := repositories.NewUserRepository(conn.DB)
 	models.Migrate(conn)
-	httpServer := server.NewServer(admin.NewAdmin(conn.DB), log)
+	router := routes.NewRouter(
+		admin.NewAdmin(conn.DB, sessionConfig),
+		handlers.NewAuthHandler(sessionConfig, userRepository, log),
+	)
+	httpServer := server.NewServer(router, log, sessionConfig)
 	defer conn.Close()
 	cmdRouter := cmd.NewCommandRouter(
 		log,
