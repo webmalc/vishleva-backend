@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"io/fs"
 	"os"
 
 	"github.com/pkg/errors"
@@ -57,8 +58,11 @@ func (l *Logger) Fatalf(format string, args ...interface{}) {
 func NewLogger() *Logger {
 	log := logrus.New()
 	config := NewConfig()
+	perm := 0600
 	file, err := os.OpenFile(
-		config.FilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600,
+		config.FilePath,
+		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+		fs.FileMode(perm),
 	)
 	if err != nil {
 		panic(errors.Wrap(err, "logger"))

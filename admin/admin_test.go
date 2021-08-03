@@ -11,6 +11,7 @@ import (
 // Should create a new admin
 func TestNewAdmin(t *testing.T) {
 	conn := db.NewConnection()
+	defer conn.Close()
 	s := session.NewSession()
 	adm := NewAdmin(conn.DB, s)
 	assert.Equal(t, adm.db, conn.DB)
@@ -21,6 +22,7 @@ func TestNewAdmin(t *testing.T) {
 // Should mount an admin
 func TestAdmin_Mount(t *testing.T) {
 	conn := db.NewConnection()
+	defer conn.Close()
 	s := session.NewSession()
 	adm := NewAdmin(conn.DB, s)
 	mux := adm.Mount()
@@ -29,6 +31,7 @@ func TestAdmin_Mount(t *testing.T) {
 
 func TestAdmin_GetBasePath(t *testing.T) {
 	conn := db.NewConnection()
+	defer conn.Close()
 	s := session.NewSession()
 	adm := NewAdmin(conn.DB, s)
 	assert.Equal(t, adm.GetBasePath(), "admin")

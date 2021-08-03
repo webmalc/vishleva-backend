@@ -4,8 +4,7 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 )
 
-// TODO: test it
-// Session is the session configf
+// Session is the session config
 type Session struct {
 	Name  string
 	Key   string

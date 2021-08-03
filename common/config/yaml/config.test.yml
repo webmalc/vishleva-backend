@@ -4,6 +4,8 @@ is_prod: false
 database_type: sqlite3
 database_uri: ":memory:"
 secret: secret_password_test
+session_name: vishleva_admin_session_test
+session_key: vishleva_user_id_test
 
 #paths
 admin_path: "admin"

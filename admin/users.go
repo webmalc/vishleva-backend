@@ -12,6 +12,7 @@ type userResource struct{}
 
 func (u *userResource) init(a *admin.Admin) {
 	usr := a.AddResource(&models.User{})
+	usr.IndexAttrs("ID", "Email", "LastLogin")
 	usr.Meta(&admin.Meta{
 		Name: "Password",
 		Type: "password",

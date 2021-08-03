@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,5 +17,8 @@ func TestNewConfig(t *testing.T) {
 
 // Setups the tests
 func TestMain(m *testing.M) {
+	if err := os.Chdir("../"); err != nil {
+		panic(err)
+	}
 	test.Run(m)
 }

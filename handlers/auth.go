@@ -6,16 +6,14 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/webmalc/vishleva-backend/common/session"
-	"github.com/webmalc/vishleva-backend/repositories"
 )
 
-// TODO: test it
 // AuthHander is auth handler
 type AuthHander struct {
-	session        *session.Session
-	userRepository *repositories.UserRepository
-	logger         ErrorLogger
-	config         *Config
+	session     *session.Session
+	userLoginer UserLoginer
+	logger      ErrorLogger
+	config      *Config
 }
 
 // GetLogin returns the login handler function
@@ -40,7 +38,7 @@ func (h *AuthHander) PostLogin(c *gin.Context) {
 	email := c.PostForm("email")
 	password := c.PostForm("password")
 
-	user, err := h.userRepository.LoginAndReturnUser(email, password)
+	user, err := h.userLoginer.LoginAndReturnUser(email, password)
 	if err != nil {
 		s.AddFlash("invalid login or password")
 		if err := s.Save(); err != nil {
@@ -70,14 +68,14 @@ func (h *AuthHander) GetLogout(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, h.config.LoginPath)
 }
 
-// NewRouter returns a new router object
+// NewAuthHandler returns a new router object
 func NewAuthHandler(
-	s *session.Session, u *repositories.UserRepository, l ErrorLogger,
+	s *session.Session, u UserLoginer, l ErrorLogger,
 ) *AuthHander {
 	return &AuthHander{
-		session:        s,
-		userRepository: u,
-		config:         NewConfig(),
-		logger:         l,
+		session:     s,
+		userLoginer: u,
+		config:      NewConfig(),
+		logger:      l,
 	}
 }

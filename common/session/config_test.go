@@ -10,8 +10,8 @@ import (
 // Should return the config object
 func TestNewConfig(t *testing.T) {
 	c := NewConfig()
-	assert.Equal(t, "vishleva_admin_session", c.SessionName)
-	assert.Equal(t, "vishleva_user_id", c.SessionKey)
+	assert.Equal(t, "vishleva_admin_session_test", c.SessionName)
+	assert.Equal(t, "vishleva_user_id_test", c.SessionKey)
 	assert.Equal(t, "secret_password_test", c.SessionSecret)
 }
 

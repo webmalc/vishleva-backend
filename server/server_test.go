@@ -20,19 +20,6 @@ import (
 	"github.com/webmalc/vishleva-backend/server/mocks"
 )
 
-// TODO: move to the router
-// Should mount the admin
-// func TestServer_mountAdmin(t *testing.T) {
-// 	l := &mocks.InfoLogger{}
-// 	a := &mocks.Router{}
-// 	server := NewServer(a, l)
-// 	server.engine = gin.Default()
-// 	a.On("GetBasePath").Return("admin").Once()
-// 	a.On("Mount").Return(http.NewServeMux()).Once()
-// 	server.mountAdmin()
-// 	l.AssertExpectations(t)
-// }
-
 // Should init the logger
 func TestServer_initLogger(t *testing.T) {
 	assert.IsType(t, &os.File{}, gin.DefaultWriter)
@@ -81,6 +68,7 @@ func TestServer_Run(t *testing.T) {
 	l := &mocks.InfoLogger{}
 	e := &mocks.ErrorLogger{}
 	conn := db.NewConnection()
+	defer conn.Close()
 	ur := repositories.NewUserRepository(conn.DB)
 	s := session.NewSession()
 	a := admin.NewAdmin(conn.DB, s)

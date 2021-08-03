@@ -4,14 +4,12 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webmalc/vishleva-backend/handlers"
 )
 
-// TODO: test it
 // Router is the router
 type Router struct {
 	admin Admin
-	auth  *handlers.AuthHander
+	auth  AuthHander
 }
 
 // mountAdmin mount the admin
@@ -34,7 +32,7 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 }
 
 // NewRouter returns a new router object
-func NewRouter(admin Admin, auth *handlers.AuthHander) *Router {
+func NewRouter(admin Admin, auth AuthHander) *Router {
 	return &Router{
 		admin: admin,
 		auth:  auth,

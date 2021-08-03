@@ -8,7 +8,6 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// TODO: test it
 // The admin auth
 type auth struct {
 	db      *gorm.DB
