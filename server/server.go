@@ -60,7 +60,7 @@ func (s *Server) setEngine() {
 	}
 	s.engine = gin.Default()
 	s.engine.Use(sessions.Sessions(s.session.Name, s.session.Store))
-	s.engine.LoadHTMLGlob("templates/*/*")
+	s.engine.LoadHTMLGlob("app/views/auth/*")
 	s.router.BindRoutes(s.engine)
 	s.engine.Use(cors.New(s.getCORS()))
 }

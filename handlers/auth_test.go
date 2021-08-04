@@ -30,7 +30,7 @@ func initRouters() (*httptest.ResponseRecorder, *gin.Engine) {
 	)
 
 	engine := gin.Default()
-	engine.LoadHTMLGlob("templates/*/*")
+	engine.LoadHTMLGlob("app/views/auth/*")
 	engine.Use(sessions.Sessions(sessionConfig.Name, sessionConfig.Store))
 	router.BindRoutes(engine)
 	w := httptest.NewRecorder()

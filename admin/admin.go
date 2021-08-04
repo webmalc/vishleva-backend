@@ -21,8 +21,9 @@ type Admin struct {
 // Init initializes the admin
 func (a *Admin) Init() {
 	a.admin = admin.New(&admin.AdminConfig{
-		DB:   a.db,
-		Auth: newAuth(a.db, a.session),
+		DB:       a.db,
+		Auth:     newAuth(a.db, a.session),
+		SiteName: a.config.SiteName,
 	})
 	a.admin.SetAssetFS(bindatafs.AssetFS.NameSpace("admin"))
 	for _, resource := range a.resourceFunctions {
@@ -51,6 +52,7 @@ func NewAdmin(db *gorm.DB, s *session.Session) *Admin {
 		session: s,
 		resourceFunctions: []ResourceInitializer{
 			&userResource{},
+			&imageResource{},
 		},
 	}
 	a.Init()

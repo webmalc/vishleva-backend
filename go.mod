@@ -18,6 +18,7 @@ require (
 	github.com/qor/admin v0.0.0-20200908023436-0c0a0b041c88
 	github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14
 	github.com/qor/qor v0.0.0-20200729071734-d587cffbbb93
+	github.com/qor/sorting v0.0.0-20201215093431-99d91cb78b78
 	github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
 	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/afero v1.4.0 // indirect

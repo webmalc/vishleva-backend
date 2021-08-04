@@ -5,6 +5,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres" // according to the gorm docs
 	_ "github.com/jinzhu/gorm/dialects/sqlite"   // according to the gorm docs
 	"github.com/pkg/errors"
+	"github.com/qor/sorting"
 	"github.com/qor/validations"
 )
 
@@ -21,5 +22,6 @@ func NewConnection() *Database {
 		panic(errors.Wrap(err, "database"))
 	}
 	validations.RegisterCallbacks(db)
+	sorting.RegisterCallbacks(db)
 	return &Database{db}
 }

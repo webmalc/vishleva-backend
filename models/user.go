@@ -10,7 +10,7 @@ import (
 // User is the user struct
 type User struct {
 	gorm.Model
-	Email     string `gorm:"size:255;not null;index:email;unique" valid:"email,required"`
+	Email     string `gorm:"size:255;not null;index;unique" valid:"email,required"`
 	Password  []byte
 	LastLogin *time.Time
 }
