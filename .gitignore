@@ -16,6 +16,8 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+.air.toml
+
 # Project
 .vscode
 .history
@@ -24,6 +26,8 @@ config/*.yml
 common/config/yaml/*.yml
 !common/config/yaml/config.dist.yml
 !common/config/yaml/config.test.yml
+public/system
 
+tmp
 logs/*
 !logs/.gitkeep

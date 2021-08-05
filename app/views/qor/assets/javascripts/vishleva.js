@@ -1,9 +1,10 @@
-function decorateTags() {
-	$('td[data-heading*="Tags"] div').each(function () {
+/* jshint esversion: 6 */
+
+function decorateTags(selector) {
+	$(selector).each(function () {
 		let el = $(this);
-		let tags = el.text().replace(/[\t\n]+/g, '').replace(/ +(?= )/g, '')
-			.trim().split(" ");
-		console.log(tags);
+		let tags = el.text().split(/\r?\n/)
+			.map(w => w.trim()).filter(Boolean);
 		let content = "";
 		tags.forEach(function (tag) {
 			if (tag) {
@@ -20,5 +21,5 @@ $("document").ready(function () {
 	$(".qor-table__content:contains('false')").css("color", "maroon");
 
 	// tags
-	decorateTags();
+	decorateTags('td[data-heading*="Tags"] div, p[data-heading*="Tags"]');
 });

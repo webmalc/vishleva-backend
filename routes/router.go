@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,6 +24,9 @@ func (r *Router) mountAdmin(e *gin.Engine) {
 // BindRoutes binds the routes
 func (r *Router) BindRoutes(e *gin.Engine) {
 	r.mountAdmin(e)
+
+	// static
+	e.Use(static.Serve("/", static.LocalFile("./public", false)))
 
 	// auth routes
 	a := e.Group("auth")

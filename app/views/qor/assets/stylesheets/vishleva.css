@@ -5,6 +5,9 @@
 [qor-icon-name*="Collection"] > a::before {
   content: "\E2C8";
 }
+[qor-icon-name*="Images"] > a::before {
+  content: "\E3C4";
+}
 
 
 /* Common */
@@ -19,14 +22,26 @@ td[data-heading*="Tags"] div {
 }
 span.v-tag {
   border: #e0e1e2 1px solid;
+  color: rgba(0,0,0,.54);
   border-radius: 2px;
   background-color: #f8f9fa;
   padding: 1px 4px;
   font-size: 12px;
-  margin: 0 6px 6px 0;
+  margin: 1px 6px 6px 0px;
+  display: inline-block;
 }
 
 /* Tags */
 td[data-heading*="Collections"] div {
   font-size: 12px;
+}
+
+/* Users */
+th[data-heading*="Email"] {
+  width: 200px;
+}
+
+/* Images */
+p[data-heading*="Tags"] {
+  margin-top: 10px;
 }

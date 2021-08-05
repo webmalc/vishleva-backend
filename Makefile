@@ -1,5 +1,5 @@
 # Go parameters
-.PHONY:  testall test testl testv coverage threshold lint run depgraph install_admin
+.PHONY:  testall test testl testv coverage threshold lint run depgraph install_admin server install_air
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
@@ -48,3 +48,9 @@ lint:
 run:
 	$(GORUN) $(c)
 
+install_air:
+	curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+	air init
+
+server:
+	air
