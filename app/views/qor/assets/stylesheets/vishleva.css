@@ -1,0 +1,32 @@
+/* Menu */
+[qor-icon-name*="Tags"] > a::before {
+  content: "\E9EF";
+}
+[qor-icon-name*="Collection"] > a::before {
+  content: "\E2C8";
+}
+
+
+/* Common */
+th[data-heading*="ID"] {
+  width: 50px;
+}
+th[data-heading*="IsEnabled"] {
+  width: 80px;
+}
+td[data-heading*="Tags"] div {
+  overflow: visible;
+}
+span.v-tag {
+  border: #e0e1e2 1px solid;
+  border-radius: 2px;
+  background-color: #f8f9fa;
+  padding: 1px 4px;
+  font-size: 12px;
+  margin: 0 6px 6px 0;
+}
+
+/* Tags */
+td[data-heading*="Collections"] div {
+  font-size: 12px;
+}
