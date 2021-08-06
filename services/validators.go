@@ -8,8 +8,6 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-// TODO: test it
-
 // IsPositive checks if values is positive
 func IsPositiveValidator(i interface{}, name string, db *gorm.DB) {
 	message := fmt.Sprintf("%s is negative", name)

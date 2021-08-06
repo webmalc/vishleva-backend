@@ -24,7 +24,6 @@ type Tariff struct {
 	IsPrimary    bool            `gorm:"type:bool;default:false;index"`
 }
 
-// TODO: test it
 // Validate validates the struct
 func (t *Tariff) Validate(db *gorm.DB) {
 	services.IsPositiveValidator(t.Price, "price", db)
