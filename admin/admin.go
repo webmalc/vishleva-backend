@@ -52,6 +52,7 @@ func NewAdmin(db *gorm.DB, s *session.Session) *Admin {
 		db:      db,
 		session: s,
 		resourceFunctions: []ResourceInitializer{
+			&tariffResource{},
 			&userResource{},
 			&imageResource{},
 		},

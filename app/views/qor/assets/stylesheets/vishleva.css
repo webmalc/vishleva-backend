@@ -1,14 +1,16 @@
 /* Menu */
 [qor-icon-name*="Tags"] > a::before {
-  content: "\E9EF";
+  content: "\e9ef";
 }
 [qor-icon-name*="Collection"] > a::before {
-  content: "\E2C8";
+  content: "\e2c8";
 }
 [qor-icon-name*="Images"] > a::before {
-  content: "\E3C4";
+  content: "\e3c4";
 }
-
+[qor-icon-name*="Tariffs"] > a::before {
+  content: "\e227";
+}
 
 /* Common */
 th[data-heading*="ID"] {

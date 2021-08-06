@@ -12,7 +12,13 @@ func TestMigrate(t *testing.T) {
 	am := &mocks.AutoMigrater{}
 	conn := db.NewConnection()
 	defer conn.Close()
-	args := []interface{}{&User{}, &Collection{}, &Tag{}, &Image{}}
+	args := []interface{}{
+		&User{},
+		&Collection{},
+		&Tag{},
+		&Image{},
+		&Tariff{},
+	}
 	am.On("AutoMigrate", args...).Return(conn.DB).Once()
 	Migrate(am)
 	am.AssertExpectations(t)
