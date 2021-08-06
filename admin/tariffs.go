@@ -8,7 +8,7 @@ import (
 type tariffResource struct{}
 
 func (u *tariffResource) initMenu(a *admin.Admin) {
-	a.AddMenu(&admin.Menu{Name: "Tariffs", Priority: 40})
+	a.AddMenu(&admin.Menu{Name: "Tariffs", Priority: 1})
 }
 
 func (u *tariffResource) init(a *admin.Admin) {

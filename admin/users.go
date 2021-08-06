@@ -11,11 +11,11 @@ import (
 type userResource struct{}
 
 func (u *userResource) initMenu(a *admin.Admin) {
-	a.AddMenu(&admin.Menu{Name: "Users", Priority: -10})
+	a.AddMenu(&admin.Menu{Name: "Admins", Priority: -10})
 }
 
 func (u *userResource) init(a *admin.Admin) {
-	usr := a.AddResource(&models.User{})
+	usr := a.AddResource(&models.User{}, &admin.Config{Name: "Admins"})
 	usr.IndexAttrs("ID", "Email", "LastLogin")
 	usr.Meta(&admin.Meta{
 		Name: "Password",

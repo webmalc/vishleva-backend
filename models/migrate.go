@@ -9,5 +9,6 @@ func Migrate(migrater AutoMigrater) {
 		&Image{},
 		&Tariff{},
 		&Review{},
+		&Client{},
 	)
 }

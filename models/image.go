@@ -14,7 +14,7 @@ type Image struct {
 	Name        string       `gorm:"size:255;"`
 	Description string       `gorm:"type:text"`
 	File        ImageStorage `sql:"size:4294967295;" media_library:"url:/system/{{class}}/{{primary_key}}/{{column}}.{{extension}}"`
-	Tags        []*Tag       `gorm:"many2many:image_tags;"`
+	Tags        []Tag        `gorm:"many2many:image_tags;"`
 }
 
 // ImageStorage is image storage

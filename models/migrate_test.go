@@ -19,6 +19,7 @@ func TestMigrate(t *testing.T) {
 		&Image{},
 		&Tariff{},
 		&Review{},
+		&Client{},
 	}
 	am.On("AutoMigrate", args...).Return(conn.DB).Once()
 	Migrate(am)

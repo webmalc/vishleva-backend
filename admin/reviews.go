@@ -11,7 +11,7 @@ import (
 type reviewResource struct{}
 
 func (u *reviewResource) initMenu(a *admin.Admin) {
-	a.AddMenu(&admin.Menu{Name: "Reviews", Priority: 50})
+	a.AddMenu(&admin.Menu{Name: "Reviews", Priority: 1})
 }
 
 func (u *reviewResource) init(a *admin.Admin) {
@@ -19,8 +19,11 @@ func (u *reviewResource) init(a *admin.Admin) {
 	images.IndexAttrs("ID", "File", "Name", "Tags")
 	images.SearchAttrs("Name", "Description", "Tags")
 
+	client := a.AddResource(&models.Client{}, &admin.Config{Invisible: true})
+	client.IndexAttrs("ID", "Name", "Social", "Email", "Phone", "Comment")
+
 	reviews := a.AddResource(&models.Review{})
-	reviews.IndexAttrs("ID", "Content", "Image", "IsEnabled")
+	reviews.IndexAttrs("ID", "Content", "Client", "Image", "IsEnabled")
 	reviews.Meta(&admin.Meta{
 		Name: "Image",
 		FormattedValuer: func(record interface{}, context *qor.Context) interface{} {
@@ -33,6 +36,14 @@ func (u *reviewResource) init(a *admin.Admin) {
 			SelectMode:         "bottom_sheet",
 			AllowBlank:         true,
 			RemoteDataResource: images,
+		},
+	})
+	reviews.Meta(&admin.Meta{
+		Name: "Client",
+		Config: &admin.SelectOneConfig{
+			SelectMode:         "bottom_sheet",
+			AllowBlank:         true,
+			RemoteDataResource: client,
 		},
 	})
 }

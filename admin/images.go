@@ -9,9 +9,9 @@ import (
 type imageResource struct{}
 
 func (u *imageResource) initMenu(a *admin.Admin) {
-	a.AddMenu(&admin.Menu{Name: "Images", Priority: 10})
-	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 20})
-	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 30})
+	a.AddMenu(&admin.Menu{Name: "Images", Priority: 1})
+	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 2})
+	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 3})
 }
 
 func (u *imageResource) init(a *admin.Admin) {

@@ -9,9 +9,10 @@ import (
 type Review struct {
 	gorm.Model
 	sorting.Sorting
-	// client
 	Content   string `gorm:"type:text; index" valid:"required"`
+	ClientID  uint
+	Client    Client `gorm:"constraint:OnDelete:SET NULL;default:null"`
 	ImageID   uint
-	Image     Image `gorm:"constraint:OnDelete:SET NULL;"`
+	Image     Image `gorm:"constraint:OnDelete:SET NULL;default:null"`
 	IsEnabled bool  `gorm:"type:bool;default:false;index"`
 }

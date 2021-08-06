@@ -14,6 +14,12 @@
 [qor-icon-name*="Reviews"] > a::before {
   content: "\e0cb";
 }
+[qor-icon-name*="Clients"] > a::before {
+  content: "\e7ff";
+}
+[qor-icon-name*="Admins"] > a::before {
+  content: "\e0da";
+}
 
 /* Common */
 th[data-heading*="ID"] {
@@ -51,4 +57,9 @@ th[data-heading*="Email"] {
 /* Images */
 p[data-heading*="Tags"] {
   margin-top: 10px;
+}
+
+/* Users */
+td[data-heading*="Comment"] div {
+  font-size: 12px;
 }
