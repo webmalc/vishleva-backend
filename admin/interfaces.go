@@ -6,5 +6,6 @@ import (
 
 // ResourceInitializer initializes a resource
 type ResourceInitializer interface {
+	initMenu(a *admin.Admin)
 	init(a *admin.Admin)
 }

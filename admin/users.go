@@ -10,6 +10,10 @@ import (
 
 type userResource struct{}
 
+func (u *userResource) initMenu(a *admin.Admin) {
+	a.AddMenu(&admin.Menu{Name: "Users", Priority: -10})
+}
+
 func (u *userResource) init(a *admin.Admin) {
 	usr := a.AddResource(&models.User{})
 	usr.IndexAttrs("ID", "Email", "LastLogin")

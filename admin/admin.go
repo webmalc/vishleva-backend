@@ -27,6 +27,7 @@ func (a *Admin) Init() {
 	})
 	a.admin.SetAssetFS(bindatafs.AssetFS.NameSpace("admin"))
 	for _, resource := range a.resourceFunctions {
+		resource.initMenu(a.admin)
 		resource.init(a.admin)
 	}
 }

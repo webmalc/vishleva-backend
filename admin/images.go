@@ -8,6 +8,12 @@ import (
 
 type imageResource struct{}
 
+func (u *imageResource) initMenu(a *admin.Admin) {
+	a.AddMenu(&admin.Menu{Name: "Images", Priority: 1})
+	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 2})
+	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 2})
+}
+
 func (u *imageResource) init(a *admin.Admin) {
 	// tags
 	tag := a.AddResource(&models.Tag{})
@@ -16,7 +22,6 @@ func (u *imageResource) init(a *admin.Admin) {
 	tag.EditAttrs("Name")
 	tag.SearchAttrs("Name")
 
-	// collections
 	collection := a.AddResource(&models.Collection{})
 	collection.IndexAttrs("-Description", "-Summary")
 	collection.Meta(&admin.Meta{
