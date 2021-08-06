@@ -8,5 +8,6 @@ func Migrate(migrater AutoMigrater) {
 		&Tag{},
 		&Image{},
 		&Tariff{},
+		&Review{},
 	)
 }

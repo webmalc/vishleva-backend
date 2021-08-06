@@ -11,6 +11,9 @@
 [qor-icon-name*="Tariffs"] > a::before {
   content: "\e227";
 }
+[qor-icon-name*="Reviews"] > a::before {
+  content: "\e0cb";
+}
 
 /* Common */
 th[data-heading*="ID"] {
@@ -21,6 +24,7 @@ th[data-heading*="IsEnabled"] {
 }
 td[data-heading*="Tags"] div {
   overflow: visible;
+  font-size: 12px;
 }
 span.v-tag {
   border: #e0e1e2 1px solid;
@@ -32,6 +36,7 @@ span.v-tag {
   margin: 1px 6px 6px 0px;
   display: inline-block;
 }
+
 
 /* Tags */
 td[data-heading*="Collections"] div {
