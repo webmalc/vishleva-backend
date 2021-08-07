@@ -12,6 +12,7 @@ type Config struct {
 	ImageMiddleHeight int
 	ImageBigWidth     int
 	ImageBigHeight    int
+	OrderStatuses     []string
 }
 
 // setDefaults sets the default values
@@ -34,6 +35,7 @@ func NewConfig() *Config {
 		ImageMiddleHeight: viper.GetInt("image_middle_height"),
 		ImageBigWidth:     viper.GetInt("image_big_width"),
 		ImageBigHeight:    viper.GetInt("image_big_height"),
+		OrderStatuses:     viper.GetStringSlice("order_statuses"),
 	}
 	return config
 }

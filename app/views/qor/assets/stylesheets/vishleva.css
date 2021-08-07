@@ -1,23 +1,29 @@
 /* Menu */
-[qor-icon-name*="Tags"] > a::before {
+[qor-icon-name*="Tags"]>a::before {
   content: "\e9ef";
 }
-[qor-icon-name*="Collection"] > a::before {
+
+[qor-icon-name*="Collection"]>a::before {
   content: "\e2c8";
 }
-[qor-icon-name*="Images"] > a::before {
+
+[qor-icon-name*="Images"]>a::before {
   content: "\e3c4";
 }
-[qor-icon-name*="Tariffs"] > a::before {
+
+[qor-icon-name*="Tariffs"]>a::before {
   content: "\e227";
 }
-[qor-icon-name*="Reviews"] > a::before {
+
+[qor-icon-name*="Reviews"]>a::before {
   content: "\e0cb";
 }
-[qor-icon-name*="Clients"] > a::before {
+
+[qor-icon-name*="Clients"]>a::before {
   content: "\e7ff";
 }
-[qor-icon-name*="Admins"] > a::before {
+
+[qor-icon-name*="Admins"]>a::before {
   content: "\e0da";
 }
 
@@ -25,16 +31,19 @@
 th[data-heading*="ID"] {
   width: 50px;
 }
+
 th[data-heading*="IsEnabled"] {
   width: 80px;
 }
+
 td[data-heading*="Tags"] div {
   overflow: visible;
   font-size: 12px;
 }
+
 span.v-tag {
   border: #e0e1e2 1px solid;
-  color: rgba(0,0,0,.54);
+  color: rgba(0, 0, 0, .54);
   border-radius: 2px;
   background-color: #f8f9fa;
   padding: 1px 4px;
@@ -57,6 +66,7 @@ th[data-heading*="Email"] {
 /* Images */
 p[data-heading*="Tags"] {
   margin-top: 10px;
+
 }
 
 /* Users */

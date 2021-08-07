@@ -24,5 +24,7 @@ func TestTariff_Validate(t *testing.T) {
 	tariff.Retouch = 100
 	tariff.Validate(conn.DB)
 	assert.Len(t, conn.GetErrors(), 1)
-	assert.Contains(t, conn.GetErrors()[0].Error(), "retouch is bigger")
+	assert.Contains(
+		t, conn.GetErrors()[0].Error(), "retouch number is greater",
+	)
 }

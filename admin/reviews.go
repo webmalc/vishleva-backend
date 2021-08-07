@@ -27,8 +27,8 @@ func (u *reviewResource) init(a *admin.Admin) {
 	reviews.Meta(&admin.Meta{
 		Name: "Image",
 		FormattedValuer: func(record interface{}, context *qor.Context) interface{} {
-			if r, ok := record.(*models.Review); ok && r.ImageID > 0 {
-				return fmt.Sprintf("image #%d", r.ImageID)
+			if r, ok := record.(*models.Review); ok && r.ImageID != nil {
+				return fmt.Sprintf("image #%d", *r.ImageID)
 			}
 			return "-"
 		},

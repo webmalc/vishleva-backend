@@ -33,7 +33,7 @@ func (t *Tariff) Validate(db *gorm.DB) {
 	services.IsPositiveValidator(t.RetouchPrice, "retouch price", db)
 	if t.Retouch > t.Photos {
 		_ = db.AddError(errors.New(
-			"retouch is bigger then the number of photos",
+			"retouch number is greater than the number of photos",
 		))
 	}
 }

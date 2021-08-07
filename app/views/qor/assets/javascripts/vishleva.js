@@ -20,6 +20,15 @@ $("document").ready(function () {
 	$(".qor-table__content:contains('true')").css("color", "green");
 	$(".qor-table__content:contains('false')").css("color", "maroon");
 
+	// status
+	$("[data-heading*=\"Status\"] .qor-table__content:contains('open')")
+		.css("color", "green");
+	$("[data-heading*=\"Status\"] .qor-table__content:contains('closed')")
+		.css("color", "gray");
+	$("[data-heading*=\"Status\"] .qor-table__content:contains('not_confirmed')")
+		.css("color", "maroon");
+
+
 	// tags
 	decorateTags('td[data-heading*="Tags"] div, p[data-heading*="Tags"]');
 });

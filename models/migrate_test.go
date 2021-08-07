@@ -3,6 +3,7 @@ package models
 import (
 	"testing"
 
+	"github.com/stretchr/testify/mock"
 	"github.com/webmalc/vishleva-backend/common/db"
 	"github.com/webmalc/vishleva-backend/models/mocks"
 )
@@ -20,8 +21,10 @@ func TestMigrate(t *testing.T) {
 		&Tariff{},
 		&Review{},
 		&Client{},
+		&Order{},
 	}
 	am.On("AutoMigrate", args...).Return(conn.DB).Once()
+	am.On("Model", mock.Anything).Return(conn.DB).Times(3)
 	Migrate(am)
 	am.AssertExpectations(t)
 }

@@ -56,7 +56,7 @@ func NewAdmin(db *gorm.DB, s *session.Session) *Admin {
 			&tariffResource{},
 			&userResource{},
 			&imageResource{},
-			&eventResource{},
+			&orderResource{config: config},
 		},
 	}
 	a.Init()

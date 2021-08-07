@@ -14,6 +14,7 @@ type Config struct {
 func setDefaults() {
 	d := "host=localhost port=5432 "
 	d += "user=postgres dbname=vishleva_backend password=postgres"
+	d += " TimeZone=UTC"
 	viper.SetDefault("database_uri", d)
 	viper.SetDefault("database_type", "postgres")
 }
