@@ -42,7 +42,7 @@ func (t *Order) Validate(db *gorm.DB) {
 	}
 	// check overlapping
 	count := 0
-	db.Where(`begin < ? AND "end" > ?`, *t.End, *t.Begin).
+	db.Where(`begin <= ? AND "end" >= ?`, *t.End, *t.Begin).
 		Not("status", []string{"not_confirmed", "closed"}).
 		Not("id", t.ID).
 		Find(&[]Order{}).Count(&count)

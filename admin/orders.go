@@ -8,14 +8,15 @@ import (
 
 type orderResource struct {
 	config *Config
+	client *admin.Resource
 }
 
-func (u *orderResource) initMenu(a *admin.Admin) {
+func (r *orderResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Orders", Priority: 1})
 	a.AddMenu(&admin.Menu{Name: "Clients", Priority: 2})
 }
 
-func (u *orderResource) init(a *admin.Admin) {
+func (r *orderResource) initClient(a *admin.Admin) {
 	client := a.AddResource(&models.Client{})
 	client.IndexAttrs(
 		"ID", "Name", "Phone", "Social",
@@ -31,6 +32,11 @@ func (u *orderResource) init(a *admin.Admin) {
 		Name:    "CreatedAt",
 		Handler: services.GetDateFilter("clients", "created_at"),
 	})
+	r.client = client
+}
+
+func (r *orderResource) init(a *admin.Admin) {
+	r.initClient(a)
 
 	order := a.AddResource(&models.Order{})
 	order.IndexAttrs(
@@ -49,14 +55,14 @@ func (u *orderResource) init(a *admin.Admin) {
 	order.Meta(&admin.Meta{
 		Name: "Status",
 		Config: &admin.SelectOneConfig{
-			Collection: u.config.OrderStatuses,
+			Collection: r.config.OrderStatuses,
 		}})
 	order.Meta(&admin.Meta{
 		Name: "Client",
 		Config: &admin.SelectOneConfig{
 			SelectMode:         "bottom_sheet",
 			AllowBlank:         true,
-			RemoteDataResource: client,
+			RemoteDataResource: r.client,
 		},
 	})
 	order.Filter(&admin.Filter{Name: "Begin"})

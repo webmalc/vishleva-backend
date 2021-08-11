@@ -6,16 +6,17 @@ import (
 	"github.com/webmalc/vishleva-backend/services"
 )
 
-type imageResource struct{}
+type imageResource struct {
+	tag *admin.Resource
+}
 
-func (u *imageResource) initMenu(a *admin.Admin) {
+func (r *imageResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Images", Priority: 1})
 	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 2})
 	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 3})
 }
 
-func (u *imageResource) init(a *admin.Admin) {
-	// tags
+func (r *imageResource) initTags(a *admin.Admin) {
 	tag := a.AddResource(&models.Tag{})
 	tag.IndexAttrs("ID", "Name", "Collections")
 	tag.NewAttrs("Name")
@@ -34,8 +35,28 @@ func (u *imageResource) init(a *admin.Admin) {
 		Config: &admin.SelectOneConfig{RemoteDataResource: tag},
 	})
 	collection.Filter(&admin.Filter{Name: "IsEnabled"})
+	r.tag = tag
+}
 
-	// images
+func (r *imageResource) batchTags(argument *admin.ActionArgument) error {
+	tags := argument.Argument.(*models.Image)
+	for _, record := range argument.FindSelectedRecords() {
+		if newImage, ok := record.(*models.Image); ok {
+			if len(tags.Tags) > 0 {
+				argument.Context.
+					GetDB().
+					Model(&newImage).
+					Association("Tags").
+					Replace(tags.Tags)
+			}
+		}
+	}
+	return nil
+}
+
+func (r *imageResource) init(a *admin.Admin) {
+	r.initTags(a)
+
 	image := a.AddResource(&models.Image{}, &admin.Config{PageCount: 50})
 	image.IndexAttrs("File", "Tags")
 	image.Meta(&admin.Meta{
@@ -45,7 +66,7 @@ func (u *imageResource) init(a *admin.Admin) {
 	image.SearchAttrs("Name", "Description")
 	image.Filter(&admin.Filter{
 		Name:   "Tags",
-		Config: &admin.SelectOneConfig{RemoteDataResource: tag},
+		Config: &admin.SelectOneConfig{RemoteDataResource: r.tag},
 	})
 	image.Filter(&admin.Filter{
 		Name:    "CreatedAt",
@@ -61,22 +82,8 @@ func (u *imageResource) init(a *admin.Admin) {
 	image.Action(&admin.Action{
 		Name:     "Update tags",
 		Resource: &batchTags,
-		Handler: func(argument *admin.ActionArgument) error {
-			tags := argument.Argument.(*models.Image)
-			for _, record := range argument.FindSelectedRecords() {
-				if newImage, ok := record.(*models.Image); ok {
-					if len(tags.Tags) > 0 {
-						argument.Context.
-							GetDB().
-							Model(&newImage).
-							Association("Tags").
-							Replace(tags.Tags)
-					}
-				}
-			}
-			return nil
-		},
-		Modes: []string{"batch"},
+		Handler:  r.batchTags,
+		Modes:    []string{"batch"},
 	})
 	image.UseTheme("grid")
 }

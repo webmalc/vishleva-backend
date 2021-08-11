@@ -1,3 +1,4 @@
 main.go
 **/mocks/*
 **/admin/bindatafs/*
+**.js
