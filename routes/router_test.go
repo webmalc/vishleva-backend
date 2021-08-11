@@ -6,14 +6,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	"github.com/webmalc/vishleva-backend/common/test"
 	"github.com/webmalc/vishleva-backend/routes/mocks"
 )
 
 func TestRouter_mountAdmin(t *testing.T) {
 	h := &mocks.AuthHander{}
+	ta := &mocks.ListHander{}
 	a := &mocks.Admin{}
-	r := NewRouter(a, h)
+	r := NewRouter(a, h, ta)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -24,7 +24,8 @@ func TestRouter_mountAdmin(t *testing.T) {
 func TestRouter_BindRoutes(t *testing.T) {
 	h := &mocks.AuthHander{}
 	a := &mocks.Admin{}
-	r := NewRouter(a, h)
+	ta := &mocks.ListHander{}
+	r := NewRouter(a, h, ta)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -36,13 +37,11 @@ func TestRouter_BindRoutes(t *testing.T) {
 func TestNewRouter(t *testing.T) {
 	h := &mocks.AuthHander{}
 	a := &mocks.Admin{}
-	r := NewRouter(a, h)
+	ta := &mocks.ListHander{}
+	r := NewRouter(a, h, ta)
 
 	assert.Equal(t, r.auth, h)
 	assert.Equal(t, r.admin, a)
-}
-
-// Setups the tests
-func TestMain(m *testing.M) {
-	test.Run(m)
+	assert.Equal(t, r.tariffs, ta)
+	assert.NotNil(t, r.cacheStore)
 }

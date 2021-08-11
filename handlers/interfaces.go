@@ -7,7 +7,12 @@ type ErrorLogger interface {
 	Errorf(format string, args ...interface{})
 }
 
-// UserLoginer logs errors.
+// UserLoginer logs users
 type UserLoginer interface {
 	LoginAndReturnUser(email, password string) (*models.User, error)
+}
+
+// TariffsGetter gets entries
+type TariffsGetter interface {
+	GetAll() ([]models.Tariff, []error)
 }

@@ -5,8 +5,11 @@ go 1.16
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef // indirect
 	github.com/aws/aws-sdk-go v1.40.15 // indirect
+	github.com/bitly/go-simplejson v0.5.0
+	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/containous/go-bindata v1.0.0
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
+	github.com/gin-contrib/cache v1.1.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-contrib/sessions v0.0.3
 	github.com/gin-contrib/static v0.0.1

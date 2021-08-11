@@ -3,14 +3,19 @@ package routes
 import (
 	"fmt"
 
+	"github.com/gin-contrib/cache"
+	"github.com/gin-contrib/cache/persistence"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
 // Router is the router
 type Router struct {
-	admin Admin
-	auth  AuthHander
+	admin      Admin
+	config     *Config
+	auth       AuthHander
+	tariffs    ListHander
+	cacheStore *persistence.InMemoryStore
 }
 
 // mountAdmin mount the admin
@@ -29,16 +34,31 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	e.Use(static.Serve("/", static.LocalFile("./public", false)))
 
 	// auth routes
-	a := e.Group("auth")
-	a.GET("/login", r.auth.GetLogin)
-	a.POST("/login", r.auth.PostLogin)
-	a.GET("/logout", r.auth.GetLogout)
+	auth := e.Group("auth")
+	auth.GET("/login", r.auth.GetLogin)
+	auth.POST("/login", r.auth.PostLogin)
+	auth.GET("/logout", r.auth.GetLogout)
+
+	// api routes
+	api := e.Group("api")
+	api.GET("/tariffs", cache.CachePage(
+		r.cacheStore, r.config.CacheTimeout, r.tariffs.GetList,
+	))
+
+	// cache
+	api.GET("/cache", func(c *gin.Context) {
+		r.cacheStore.Flush()
+	})
 }
 
 // NewRouter returns a new router object
-func NewRouter(admin Admin, auth AuthHander) *Router {
+func NewRouter(admin Admin, auth AuthHander, prices ListHander) *Router {
+	config := NewConfig()
 	return &Router{
-		admin: admin,
-		auth:  auth,
+		config:     config,
+		admin:      admin,
+		auth:       auth,
+		tariffs:    prices,
+		cacheStore: persistence.NewInMemoryStore(config.CacheTimeout),
 	}
 }

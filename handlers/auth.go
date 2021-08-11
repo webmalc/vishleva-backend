@@ -68,7 +68,7 @@ func (h *AuthHander) GetLogout(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, h.config.LoginPath)
 }
 
-// NewAuthHandler returns a new router object
+// NewAuthHandler returns a new handler object
 func NewAuthHandler(
 	s *session.Session, u UserLoginer, l ErrorLogger,
 ) *AuthHander {

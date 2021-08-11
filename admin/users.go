@@ -14,6 +14,11 @@ type userResource struct {
 
 func (r *userResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Admins", Priority: -10})
+	a.AddMenu(&admin.Menu{
+		Name:     "Clear cache",
+		Link:     "/api/cache",
+		Priority: -20,
+	})
 }
 
 func (r *userResource) passwordSetter(

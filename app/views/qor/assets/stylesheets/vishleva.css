@@ -27,6 +27,10 @@
   content: "\e0da";
 }
 
+[qor-icon-name*="Clear cache"]>a::before {
+  content: "\e86a";
+}
+
 /* Common */
 th[data-heading*="ID"] {
   width: 50px;

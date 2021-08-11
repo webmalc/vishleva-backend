@@ -70,9 +70,14 @@ func TestServer_Run(t *testing.T) {
 	conn := db.NewConnection()
 	defer conn.Close()
 	ur := repositories.NewUserRepository(conn.DB)
+	tr := repositories.NewTariffRepository(conn.DB)
 	s := session.NewSession()
 	a := admin.NewAdmin(conn.DB, s)
-	r := routes.NewRouter(a, handlers.NewAuthHandler(s, ur, e))
+	r := routes.NewRouter(
+		a,
+		handlers.NewAuthHandler(s, ur, e),
+		handlers.NewTariffsHandler(tr),
+	)
 	server := NewServer(r, l, s)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

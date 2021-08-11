@@ -18,3 +18,8 @@ type AuthHander interface {
 	PostLogin(c *gin.Context)
 	GetLogout(c *gin.Context)
 }
+
+// ListHander is the handler interface
+type ListHander interface {
+	GetList(c *gin.Context)
+}
