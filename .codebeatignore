@@ -2,3 +2,4 @@ main.go
 **/mocks/*
 **/admin/bindatafs/*
 **.js
+app/views/qor/assets/javascripts/vishleva.js
