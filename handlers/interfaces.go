@@ -16,3 +16,8 @@ type UserLoginer interface {
 type TariffsGetter interface {
 	GetAll() ([]models.Tariff, []error)
 }
+
+// TagsGetter gets entries
+type TagsGetter interface {
+	GetAll() ([]models.Tag, []error)
+}

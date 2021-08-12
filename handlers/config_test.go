@@ -1,12 +1,93 @@
 package handlers
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"testing"
 
+	"github.com/bitly/go-simplejson"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
+	"github.com/webmalc/vishleva-backend/admin"
+	"github.com/webmalc/vishleva-backend/common/db"
+	"github.com/webmalc/vishleva-backend/common/logger"
+	"github.com/webmalc/vishleva-backend/common/session"
 	"github.com/webmalc/vishleva-backend/common/test"
+	"github.com/webmalc/vishleva-backend/models"
+	"github.com/webmalc/vishleva-backend/repositories"
+	"github.com/webmalc/vishleva-backend/routes"
 )
+
+func createTags(conn *db.Database) {
+	conn.Create(&models.Tag{Name: "one"})
+	conn.Create(&models.Tag{Name: "two"})
+}
+
+func createTariffs(conn *db.Database) {
+	conn.Create(
+		&models.Tariff{
+			Name:         "one",
+			Price:        decimal.NewFromInt(100), // nolint // unnecessary: unparam
+			Duration:     60,
+			Photos:       20,
+			Retouch:      10,
+			RetouchPrice: decimal.NewFromInt(10), // nolint // unnecessary: unparam
+			IsEnabled:    true,
+		},
+	)
+	conn.Create(
+		&models.Tariff{
+			Name:         "two",
+			Price:        decimal.NewFromInt(33), // nolint // unnecessary: unparam
+			Duration:     30,
+			Photos:       10,
+			Retouch:      10,
+			RetouchPrice: decimal.NewFromInt(17), // nolint // unnecessary: unparam
+			IsEnabled:    false,
+		},
+	)
+}
+
+func checkResponse(t *testing.T, url string, count int) {
+	w, engine := initRoutes()
+	req, _ := http.NewRequest("GET", url, nil)
+	engine.ServeHTTP(w, req)
+	assert.Equal(t, 200, w.Code)
+	json, err := simplejson.NewFromReader(w.Body)
+	assert.Nil(t, err)
+	entries, err := json.Get("entries").Array()
+	assert.Nil(t, err)
+	assert.Len(t, entries, count)
+}
+
+// initRoutes initializes the router
+func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
+	log := logger.NewLogger()
+	conn := db.NewConnection()
+	sessionConfig := session.NewSession()
+	userRepository := repositories.NewUserRepository(conn.DB)
+	tariffsRepository := repositories.NewTariffRepository(conn.DB)
+	tagsRepository := repositories.NewTagRepository(conn.DB)
+	models.Migrate(conn)
+	router := routes.NewRouter(
+		admin.NewAdmin(conn.DB, sessionConfig),
+		NewAuthHandler(sessionConfig, userRepository, log),
+		NewTariffsHandler(tariffsRepository),
+		NewTagsHandler(tagsRepository),
+	)
+
+	engine := gin.Default()
+	engine.LoadHTMLGlob("app/views/auth/*")
+	engine.Use(sessions.Sessions(sessionConfig.Name, sessionConfig.Store))
+	router.BindRoutes(engine)
+	w := httptest.NewRecorder()
+	createTariffs(conn)
+	createTags(conn)
+	return w, engine
+}
 
 // Should return the config object
 func TestNewConfig(t *testing.T) {

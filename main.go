@@ -24,11 +24,13 @@ func main() {
 	sessionConfig := session.NewSession()
 	userRepository := repositories.NewUserRepository(conn.DB)
 	tariffRepository := repositories.NewTariffRepository(conn.DB)
+	tagsRepository := repositories.NewTagRepository(conn.DB)
 	models.Migrate(conn)
 	router := routes.NewRouter(
 		admin.NewAdmin(conn.DB, sessionConfig),
 		handlers.NewAuthHandler(sessionConfig, userRepository, log),
 		handlers.NewTariffsHandler(tariffRepository),
+		handlers.NewTagsHandler(tagsRepository),
 	)
 	httpServer := server.NewServer(router, log, sessionConfig)
 	defer conn.Close()
