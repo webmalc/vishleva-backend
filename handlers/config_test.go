@@ -26,6 +26,11 @@ func createTags(conn *db.Database) {
 	conn.Create(&models.Tag{Name: "two"})
 }
 
+func createReviews(conn *db.Database) {
+	conn.Create(&models.Review{Content: "one", IsEnabled: true})
+	conn.Create(&models.Review{Content: "two", IsEnabled: false})
+}
+
 func createTariffs(conn *db.Database) {
 	conn.Create(
 		&models.Tariff{
@@ -71,12 +76,14 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	userRepository := repositories.NewUserRepository(conn.DB)
 	tariffsRepository := repositories.NewTariffRepository(conn.DB)
 	tagsRepository := repositories.NewTagRepository(conn.DB)
+	reviewsRepository := repositories.NewReviewRepository(conn.DB)
 	models.Migrate(conn)
 	router := routes.NewRouter(
 		admin.NewAdmin(conn.DB, sessionConfig),
 		NewAuthHandler(sessionConfig, userRepository, log),
 		NewTariffsHandler(tariffsRepository),
 		NewTagsHandler(tagsRepository),
+		NewReviewsHandler(reviewsRepository),
 	)
 
 	engine := gin.Default()
@@ -86,6 +93,7 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	w := httptest.NewRecorder()
 	createTariffs(conn)
 	createTags(conn)
+	createReviews(conn)
 	return w, engine
 }
 

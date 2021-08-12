@@ -16,6 +16,7 @@ type Router struct {
 	auth       AuthHander
 	tariffs    ListHander
 	tags       ListHander
+	reviews    ListHander
 	cacheStore *persistence.InMemoryStore
 }
 
@@ -48,6 +49,9 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	api.GET("/tags", cache.CachePage(
 		r.cacheStore, r.config.CacheTimeout, r.tags.GetList,
 	))
+	api.GET("/reviews", cache.CachePage(
+		r.cacheStore, r.config.CacheTimeout, r.reviews.GetList,
+	))
 
 	// cache
 	api.GET("/cache", func(c *gin.Context) {
@@ -61,6 +65,7 @@ func NewRouter(
 	auth AuthHander,
 	tariffs ListHander,
 	tags ListHander,
+	reviews ListHander,
 ) *Router {
 	config := NewConfig()
 	return &Router{
@@ -69,6 +74,7 @@ func NewRouter(
 		auth:       auth,
 		tariffs:    tariffs,
 		tags:       tags,
+		reviews:    reviews,
 		cacheStore: persistence.NewInMemoryStore(config.CacheTimeout),
 	}
 }

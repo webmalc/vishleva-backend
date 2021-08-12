@@ -21,3 +21,8 @@ type TariffsGetter interface {
 type TagsGetter interface {
 	GetAll() ([]models.Tag, []error)
 }
+
+// ReviewsGetter gets entries
+type ReviewsGetter interface {
+	GetAll() ([]models.Review, []error)
+}

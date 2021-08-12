@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/jinzhu/gorm"
@@ -23,4 +24,9 @@ func (t *Client) Validate(db *gorm.DB) {
 			"name is empty",
 		))
 	}
+}
+
+// MarshalJSON returns the JSON respresentation
+func (t *Client) MarshalJSON() ([]byte, error) {
+	return json.Marshal(t.Name)
 }
