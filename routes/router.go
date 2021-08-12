@@ -11,13 +11,14 @@ import (
 
 // Router is the router
 type Router struct {
-	admin      Admin
-	config     *Config
-	auth       AuthHander
-	tariffs    ListHander
-	tags       ListHander
-	reviews    ListHander
-	cacheStore *persistence.InMemoryStore
+	admin       Admin
+	config      *Config
+	auth        AuthHander
+	tariffs     ListHander
+	tags        ListHander
+	reviews     ListHander
+	collections ListHander
+	cacheStore  *persistence.InMemoryStore
 }
 
 // mountAdmin mount the admin
@@ -52,6 +53,9 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	api.GET("/reviews", cache.CachePage(
 		r.cacheStore, r.config.CacheTimeout, r.reviews.GetList,
 	))
+	api.GET("/collections", cache.CachePage(
+		r.cacheStore, r.config.CacheTimeout, r.collections.GetList,
+	))
 
 	// cache
 	api.GET("/cache", func(c *gin.Context) {
@@ -66,15 +70,17 @@ func NewRouter(
 	tariffs ListHander,
 	tags ListHander,
 	reviews ListHander,
+	collections ListHander,
 ) *Router {
 	config := NewConfig()
 	return &Router{
-		config:     config,
-		admin:      admin,
-		auth:       auth,
-		tariffs:    tariffs,
-		tags:       tags,
-		reviews:    reviews,
-		cacheStore: persistence.NewInMemoryStore(config.CacheTimeout),
+		config:      config,
+		admin:       admin,
+		auth:        auth,
+		tariffs:     tariffs,
+		tags:        tags,
+		reviews:     reviews,
+		collections: collections,
+		cacheStore:  persistence.NewInMemoryStore(config.CacheTimeout),
 	}
 }

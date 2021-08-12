@@ -26,6 +26,7 @@ func main() {
 	tariffRepository := repositories.NewTariffRepository(conn.DB)
 	tagsRepository := repositories.NewTagRepository(conn.DB)
 	reviewsRepository := repositories.NewReviewRepository(conn.DB)
+	collectionsRepository := repositories.NewCollectionRepository(conn.DB)
 	models.Migrate(conn)
 	router := routes.NewRouter(
 		admin.NewAdmin(conn.DB, sessionConfig),
@@ -33,6 +34,7 @@ func main() {
 		handlers.NewTariffsHandler(tariffRepository),
 		handlers.NewTagsHandler(tagsRepository),
 		handlers.NewReviewsHandler(reviewsRepository),
+		handlers.NewCollectionHandler(collectionsRepository),
 	)
 	httpServer := server.NewServer(router, log, sessionConfig)
 	defer conn.Close()

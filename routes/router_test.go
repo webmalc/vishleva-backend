@@ -14,8 +14,9 @@ func TestRouter_mountAdmin(t *testing.T) {
 	ta := &mocks.ListHander{}
 	tg := &mocks.ListHander{}
 	rg := &mocks.ListHander{}
+	ch := &mocks.ListHander{}
 	a := &mocks.Admin{}
-	r := NewRouter(a, h, ta, tg, rg)
+	r := NewRouter(a, h, ta, tg, rg, ch)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -29,7 +30,8 @@ func TestRouter_BindRoutes(t *testing.T) {
 	ta := &mocks.ListHander{}
 	tg := &mocks.ListHander{}
 	rg := &mocks.ListHander{}
-	r := NewRouter(a, h, ta, tg, rg)
+	ch := &mocks.ListHander{}
+	r := NewRouter(a, h, ta, tg, rg, ch)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -44,7 +46,8 @@ func TestNewRouter(t *testing.T) {
 	ta := &mocks.ListHander{}
 	tg := &mocks.ListHander{}
 	rg := &mocks.ListHander{}
-	r := NewRouter(a, h, ta, tg, rg)
+	ch := &mocks.ListHander{}
+	r := NewRouter(a, h, ta, tg, rg, ch)
 
 	assert.Equal(t, r.auth, h)
 	assert.Equal(t, r.admin, a)

@@ -26,3 +26,8 @@ type TagsGetter interface {
 type ReviewsGetter interface {
 	GetAll() ([]models.Review, []error)
 }
+
+// CollectionsGetter gets entries
+type CollectionsGetter interface {
+	GetAll() ([]models.Collection, []error)
+}

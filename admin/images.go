@@ -1,13 +1,17 @@
 package admin
 
 import (
+	"fmt"
+
 	"github.com/qor/admin"
+	"github.com/qor/qor"
 	"github.com/webmalc/vishleva-backend/models"
 	"github.com/webmalc/vishleva-backend/services"
 )
 
 type imageResource struct {
-	tag *admin.Resource
+	tag        *admin.Resource
+	collection *admin.Resource
 }
 
 func (r *imageResource) initMenu(a *admin.Admin) {
@@ -16,25 +20,42 @@ func (r *imageResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 3})
 }
 
-func (r *imageResource) initTags(a *admin.Admin) {
-	tag := a.AddResource(&models.Tag{})
-	tag.IndexAttrs("ID", "Name", "Collections")
-	tag.NewAttrs("Name")
-	tag.EditAttrs("Name")
-	tag.SearchAttrs("Name")
-
+func (r *imageResource) initCollection(a *admin.Admin) {
+	r.initTags(a)
 	collection := a.AddResource(&models.Collection{})
 	collection.IndexAttrs("-Description", "-Summary")
 	collection.Meta(&admin.Meta{
 		Name:   "Tags",
 		Config: &admin.SelectManyConfig{SelectMode: "bottom_sheet"},
 	})
+	collection.Meta(&admin.Meta{
+		Name: "Image",
+		FormattedValuer: func(record interface{}, context *qor.Context) interface{} {
+			if r, ok := record.(*models.Collection); ok && r.ImageID != nil {
+				return fmt.Sprintf("image #%d", *r.ImageID)
+			}
+			return "-"
+		},
+		Config: &admin.SelectOneConfig{
+			SelectMode: "bottom_sheet",
+			AllowBlank: true,
+		},
+	})
 	collection.SearchAttrs("Name", "Description", "Summary")
 	collection.Filter(&admin.Filter{
 		Name:   "Tags",
-		Config: &admin.SelectOneConfig{RemoteDataResource: tag},
+		Config: &admin.SelectOneConfig{RemoteDataResource: r.tag},
 	})
 	collection.Filter(&admin.Filter{Name: "IsEnabled"})
+	r.collection = collection
+}
+
+func (r *imageResource) initTags(a *admin.Admin) {
+	tag := a.AddResource(&models.Tag{})
+	tag.IndexAttrs("ID", "Name", "Collections")
+	tag.NewAttrs("Name")
+	tag.EditAttrs("Name")
+	tag.SearchAttrs("Name")
 	r.tag = tag
 }
 
@@ -55,7 +76,7 @@ func (r *imageResource) batchTags(argument *admin.ActionArgument) error {
 }
 
 func (r *imageResource) init(a *admin.Admin) {
-	r.initTags(a)
+	r.initCollection(a)
 
 	image := a.AddResource(&models.Image{}, &admin.Config{PageCount: 50})
 	image.IndexAttrs("File", "Tags")

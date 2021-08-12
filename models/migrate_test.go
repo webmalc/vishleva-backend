@@ -24,7 +24,7 @@ func TestMigrate(t *testing.T) {
 		&Order{},
 	}
 	am.On("AutoMigrate", args...).Return(conn.DB).Once()
-	am.On("Model", mock.Anything).Return(conn.DB).Times(3)
+	am.On("Model", mock.Anything).Return(conn.DB).Times(4)
 	Migrate(am)
 	am.AssertExpectations(t)
 }

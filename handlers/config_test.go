@@ -21,6 +21,11 @@ import (
 	"github.com/webmalc/vishleva-backend/routes"
 )
 
+func createCollections(conn *db.Database) {
+	conn.Create(&models.Collection{Name: "collection one", IsEnabled: true})
+	conn.Create(&models.Collection{Name: "collection two", IsEnabled: false})
+}
+
 func createTags(conn *db.Database) {
 	conn.Create(&models.Tag{Name: "one"})
 	conn.Create(&models.Tag{Name: "two"})
@@ -77,6 +82,7 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	tariffsRepository := repositories.NewTariffRepository(conn.DB)
 	tagsRepository := repositories.NewTagRepository(conn.DB)
 	reviewsRepository := repositories.NewReviewRepository(conn.DB)
+	collectionsRepository := repositories.NewCollectionRepository(conn.DB)
 	models.Migrate(conn)
 	router := routes.NewRouter(
 		admin.NewAdmin(conn.DB, sessionConfig),
@@ -84,6 +90,7 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 		NewTariffsHandler(tariffsRepository),
 		NewTagsHandler(tagsRepository),
 		NewReviewsHandler(reviewsRepository),
+		NewCollectionHandler(collectionsRepository),
 	)
 
 	engine := gin.Default()
@@ -94,6 +101,7 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	createTariffs(conn)
 	createTags(conn)
 	createReviews(conn)
+	createCollections(conn)
 	return w, engine
 }
 
