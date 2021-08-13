@@ -74,6 +74,7 @@ func TestServer_Run(t *testing.T) {
 	tg := repositories.NewTagRepository(conn.DB)
 	rr := repositories.NewReviewRepository(conn.DB)
 	cr := repositories.NewCollectionRepository(conn.DB)
+	ir := repositories.NewImageRepository(conn.DB)
 	s := session.NewSession()
 	a := admin.NewAdmin(conn.DB, s)
 	r := routes.NewRouter(
@@ -83,6 +84,7 @@ func TestServer_Run(t *testing.T) {
 		handlers.NewTagsHandler(tg),
 		handlers.NewReviewsHandler(rr),
 		handlers.NewCollectionHandler(cr),
+		handlers.NewImagesHandler(ir),
 	)
 	server := NewServer(r, l, s)
 	ctx, cancel := context.WithCancel(context.Background())

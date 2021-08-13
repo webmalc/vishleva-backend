@@ -13,9 +13,9 @@ type TagsHander struct {
 
 // GetList returns the list handler function
 func (h *TagsHander) GetList(c *gin.Context) {
-	tariffs, _ := h.getter.GetAll()
+	tags, _ := h.getter.GetAll()
 	c.JSON(http.StatusOK, gin.H{
-		"entries": tariffs,
+		"entries": tags,
 	})
 }
 

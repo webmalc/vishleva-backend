@@ -31,3 +31,8 @@ type ReviewsGetter interface {
 type CollectionsGetter interface {
 	GetAll() ([]models.Collection, []error)
 }
+
+// ImagesGetter gets entries
+type ImagesGetter interface {
+	GetAll(tag string, collectionID uint) ([]models.Image, []error)
+}

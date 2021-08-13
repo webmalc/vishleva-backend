@@ -19,6 +19,16 @@ func (r *CollectionRepository) GetAll() ([]models.Collection, []error) {
 	return collections, r.db.GetErrors()
 }
 
+// GetTagsIDs return the collection tags IDs
+func (r *CollectionRepository) GetTagsIDs(collectionID uint) []uint {
+	ids := []uint{}
+	r.db.Raw(`
+	SELECT ct.tag_id FROM collection_tags as ct
+	WHERE ct.collection_id = ?`, collectionID).
+		Pluck("", &ids)
+	return ids
+}
+
 // NewCollectionRepository returns a new repository struct
 func NewCollectionRepository(db *gorm.DB) *CollectionRepository {
 	return &CollectionRepository{db: db}

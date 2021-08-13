@@ -13,9 +13,9 @@ type ReviewsHander struct {
 
 // GetList returns the list handler function
 func (h *ReviewsHander) GetList(c *gin.Context) {
-	tariffs, _ := h.getter.GetAll()
+	reviews, _ := h.getter.GetAll()
 	c.JSON(http.StatusOK, gin.H{
-		"entries": tariffs,
+		"entries": reviews,
 	})
 }
 

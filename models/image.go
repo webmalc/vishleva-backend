@@ -1,6 +1,8 @@
 package models
 
 import (
+	"encoding/json"
+
 	"github.com/jinzhu/gorm"
 	"github.com/qor/media"
 	"github.com/qor/media/media_library"
@@ -15,6 +17,23 @@ type Image struct {
 	Description string       `gorm:"type:text"`
 	File        ImageStorage `sql:"size:4294967295;" media_library:"url:/system/{{class}}/{{primary_key}}/{{column}}.{{extension}}"`
 	Tags        []Tag        `gorm:"many2many:image_tags;"`
+}
+
+// MarshalJSON returns the JSON respresentation
+func (t *Image) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+		URL         string `json:"url"`
+		Preview     string `json:"preview"`
+		Tags        []Tag  `json:"tags"`
+	}{
+		Name:        t.Name,
+		Description: t.Description,
+		Tags:        t.Tags,
+		URL:         t.File.URL("big"),
+		Preview:     t.File.URL("small"),
+	})
 }
 
 // ImageStorage is image storage

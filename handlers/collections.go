@@ -13,9 +13,9 @@ type CollectionHander struct {
 
 // GetList returns the list handler function
 func (h *CollectionHander) GetList(c *gin.Context) {
-	tariffs, _ := h.getter.GetAll()
+	collections, _ := h.getter.GetAll()
 	c.JSON(http.StatusOK, gin.H{
-		"entries": tariffs,
+		"entries": collections,
 	})
 }
 

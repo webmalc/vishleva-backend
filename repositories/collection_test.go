@@ -25,6 +25,27 @@ func TestCollectionRepository_GetAll(t *testing.T) {
 	assert.True(t, collections[0].IsEnabled)
 }
 
+func TestCollectionRepository_GetTagsIDs(t *testing.T) {
+	c := db.NewConnection()
+	models.Migrate(c)
+	repo := NewCollectionRepository(c.DB)
+	collections, _ := repo.GetAll()
+	collection := &models.Collection{
+		Name:      "collection one",
+		IsEnabled: true,
+		Tags: []*models.Tag{
+			{Name: "tag one"},
+			{Name: "tag two"},
+		}}
+	assert.Len(t, collections, 0)
+
+	c.Create(collection)
+	ids := repo.GetTagsIDs(collection.ID)
+	assert.Len(t, ids, 2)
+	assert.Contains(t, ids, collection.Tags[0].ID)
+	assert.Contains(t, ids, collection.Tags[1].ID)
+}
+
 func TestNewCollectionRepository(t *testing.T) {
 	c := db.NewConnection()
 	defer c.Close()
