@@ -8,6 +8,7 @@ import (
 type Config struct {
 	DatabaseURI  string
 	DatabaseType string
+	IsDebug      bool
 }
 
 // setDefaults sets the default values
@@ -25,6 +26,7 @@ func NewConfig() *Config {
 	config := &Config{
 		DatabaseURI:  viper.GetString("database_uri"),
 		DatabaseType: viper.GetString("database_type"),
+		IsDebug:      !viper.GetBool("is_prod"),
 	}
 	return config
 }

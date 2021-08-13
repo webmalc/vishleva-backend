@@ -19,6 +19,7 @@ type Database struct {
 func NewConnection() *Database {
 	config := NewConfig()
 	db, err := gorm.Open(config.DatabaseType, config.DatabaseURI)
+	db.LogMode(config.IsDebug)
 	if err != nil {
 		panic(errors.Wrap(err, "database"))
 	}
