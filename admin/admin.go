@@ -26,6 +26,12 @@ func (a *Admin) Init() {
 		SiteName: a.config.SiteName,
 	})
 	a.admin.SetAssetFS(bindatafs.AssetFS.NameSpace("admin"))
+	a.admin.GetRouter().Get("/", func(c *admin.Context) {
+		http.Redirect(
+			c.Writer, c.Request,
+			"/admin/orders", http.StatusMovedPermanently,
+		)
+	})
 	for _, resource := range a.resourceFunctions {
 		resource.initMenu(a.admin)
 		resource.init(a.admin)
