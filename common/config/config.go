@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/spf13/viper"
 )
@@ -25,6 +26,7 @@ func getFilename() string {
 func setDefaults(baseDir string) {
 	viper.Set("base_dir", filepath.Dir(filepath.Dir(baseDir))+"/")
 	viper.SetDefault("is_prod", false)
+	viper.SetDefault("timezone", "UTC")
 	viper.SetDefault("log_path", "logs/app.log")
 }
 
@@ -51,6 +53,12 @@ func getBaseDir() string {
 	return filepath.Dir(b)
 }
 
+// setTimezone sets timezone
+func setTimezone() {
+	loc, _ := time.LoadLocation(viper.GetString("timezone"))
+	time.Local = loc
+}
+
 // read reads configuration
 func read() {
 	if err := viper.ReadInConfig(); err != nil {
@@ -65,5 +73,6 @@ func Setup() {
 	setPaths(baseDir)
 	setEnv()
 	setDefaults(baseDir)
+	setTimezone()
 	read()
 }

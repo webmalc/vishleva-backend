@@ -4,6 +4,7 @@ is_prod: true
 database_type: postgres
 database_uri: host=vishleva-backend-postgres port=5432 user=postgres dbname=vishleva_backend password=postgres sslmode=disable TimeZone=UTC
 secret: secret_password
+timezone: UTC
 order_statuses:
   - not_confirmed
   - open

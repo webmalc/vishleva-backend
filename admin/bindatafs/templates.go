@@ -1,3 +1,4 @@
+//go:build !bindatafs
 // +build !bindatafs
 
 package bindatafs

@@ -31,3 +31,4 @@ public/system
 tmp
 logs/*
 !logs/.gitkeep
+__debug_bin
