@@ -3,7 +3,6 @@ package config
 import (
 	"os"
 	"testing"
-	"time"
 
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -29,7 +28,6 @@ func TestSetup(t *testing.T) {
 	Setup()
 	path = viper.GetString("log_path")
 	assert.Contains(t, path, "logs/app.test.log")
-	assert.Equal(t, "UTC", time.Local.String())
 }
 
 // Should panic with the invalid environment variable

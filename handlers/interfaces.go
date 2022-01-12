@@ -1,6 +1,10 @@
 package handlers
 
-import "github.com/webmalc/vishleva-backend/models"
+import (
+	"time"
+
+	"github.com/webmalc/vishleva-backend/models"
+)
 
 // ErrorLogger logs errors.
 type ErrorLogger interface {
@@ -35,4 +39,9 @@ type CollectionsGetter interface {
 // ImagesGetter gets entries
 type ImagesGetter interface {
 	GetAll(tag string, collectionID uint) ([]models.Image, []error)
+}
+
+// CalendarGenerator gets entries
+type CalendarGenerator interface {
+	Get(begin time.Time) []*models.CalendarDay
 }

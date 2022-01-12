@@ -19,6 +19,7 @@ type Router struct {
 	reviews     ListHander
 	collections ListHander
 	images      ListHander
+	calendar    ListHander
 	cacheStore  *persistence.InMemoryStore
 }
 
@@ -60,6 +61,7 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	api.GET("/images", cache.CachePage(
 		r.cacheStore, r.config.CacheTimeout, r.images.GetList,
 	))
+	api.GET("/calendar", r.calendar.GetList)
 
 	// cache
 	api.GET("/cache", func(c *gin.Context) {
@@ -76,6 +78,7 @@ func NewRouter(
 	reviews ListHander,
 	collections ListHander,
 	images ListHander,
+	calendar ListHander,
 ) *Router {
 	config := NewConfig()
 	return &Router{
@@ -87,6 +90,7 @@ func NewRouter(
 		reviews:     reviews,
 		collections: collections,
 		images:      images,
+		calendar:    calendar,
 		cacheStore:  persistence.NewInMemoryStore(config.CacheTimeout),
 	}
 }

@@ -12,6 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/webmalc/vishleva-backend/admin"
+	"github.com/webmalc/vishleva-backend/calendar"
 	"github.com/webmalc/vishleva-backend/common/db"
 	"github.com/webmalc/vishleva-backend/common/session"
 	"github.com/webmalc/vishleva-backend/handlers"
@@ -75,6 +76,8 @@ func TestServer_Run(t *testing.T) {
 	rr := repositories.NewReviewRepository(conn.DB)
 	cr := repositories.NewCollectionRepository(conn.DB)
 	ir := repositories.NewImageRepository(conn.DB)
+	or := repositories.NewOrderRepository(conn.DB)
+	cal := calendar.NewGenerator(or)
 	s := session.NewSession()
 	a := admin.NewAdmin(conn.DB, s)
 	r := routes.NewRouter(
@@ -85,6 +88,7 @@ func TestServer_Run(t *testing.T) {
 		handlers.NewReviewsHandler(rr),
 		handlers.NewCollectionHandler(cr),
 		handlers.NewImagesHandler(ir),
+		handlers.NewCalendarHandler(cal),
 	)
 	server := NewServer(r, l, s)
 	ctx, cancel := context.WithCancel(context.Background())

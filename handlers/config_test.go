@@ -12,6 +12,7 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 	"github.com/webmalc/vishleva-backend/admin"
+	"github.com/webmalc/vishleva-backend/calendar"
 	"github.com/webmalc/vishleva-backend/common/db"
 	"github.com/webmalc/vishleva-backend/common/logger"
 	"github.com/webmalc/vishleva-backend/common/session"
@@ -89,6 +90,8 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	reviewsRepository := repositories.NewReviewRepository(conn.DB)
 	collectionsRepository := repositories.NewCollectionRepository(conn.DB)
 	imagesRepository := repositories.NewImageRepository(conn.DB)
+	orderRepository := repositories.NewOrderRepository(conn.DB)
+	cal := calendar.NewGenerator(orderRepository)
 	models.Migrate(conn)
 	router := routes.NewRouter(
 		admin.NewAdmin(conn.DB, sessionConfig),
@@ -98,6 +101,7 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 		NewReviewsHandler(reviewsRepository),
 		NewCollectionHandler(collectionsRepository),
 		NewImagesHandler(imagesRepository),
+		NewCalendarHandler(cal),
 	)
 
 	engine := gin.Default()
