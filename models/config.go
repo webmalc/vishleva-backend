@@ -15,7 +15,7 @@ type Config struct {
 	OrderStatuses     []string
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("image_small_width", 60)    // nolint // unnecessary: unparam
 	viper.SetDefault("image_small_height", 60)   // nolint // unnecessary: unparam
@@ -37,5 +37,6 @@ func NewConfig() *Config {
 		ImageBigHeight:    viper.GetInt("image_big_height"),
 		OrderStatuses:     viper.GetStringSlice("order_statuses"),
 	}
+
 	return config
 }

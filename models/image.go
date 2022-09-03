@@ -9,7 +9,7 @@ import (
 	"github.com/qor/sorting"
 )
 
-// Image is a model
+// Image is a model.
 type Image struct {
 	gorm.Model
 	sorting.Sorting
@@ -19,7 +19,7 @@ type Image struct {
 	Tags        []Tag        `gorm:"many2many:image_tags;"`
 }
 
-// MarshalJSON returns the JSON respresentation
+// MarshalJSON returns the JSON representation.
 func (t *Image) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
 		Name        string `json:"name"`
@@ -36,14 +36,15 @@ func (t *Image) MarshalJSON() ([]byte, error) {
 	})
 }
 
-// ImageStorage is image storage
+// ImageStorage is image storage.
 type ImageStorage struct {
 	media_library.MediaLibraryStorage
 }
 
-// GetSizes return the sizes
+// GetSizes return the sizes.
 func (ImageStorage) GetSizes() map[string]*media.Size {
 	c := NewConfig()
+
 	return map[string]*media.Size{
 		"small": {
 			Width:   c.ImageSmallWidth * 2,

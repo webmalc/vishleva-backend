@@ -8,7 +8,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/session"
 )
 
-// Should create a new admin
+// Should create a new admin.
 func TestNewAdmin(t *testing.T) {
 	conn := db.NewConnection()
 	defer conn.Close()
@@ -19,7 +19,7 @@ func TestNewAdmin(t *testing.T) {
 	assert.NotNil(t, adm.admin)
 }
 
-// Should mount an admin
+// Should mount an admin.
 func TestAdmin_Mount(t *testing.T) {
 	conn := db.NewConnection()
 	defer conn.Close()

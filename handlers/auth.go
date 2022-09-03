@@ -8,7 +8,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/session"
 )
 
-// AuthHandler is auth handler
+// AuthHandler is auth handler.
 type AuthHandler struct {
 	session     *session.Session
 	userLoginer UserLoginer
@@ -16,11 +16,12 @@ type AuthHandler struct {
 	config      *Config
 }
 
-// GetLogin returns the login handler function
+// GetLogin returns the login handler function.
 func (h *AuthHandler) GetLogin(c *gin.Context) {
 	s := sessions.Default(c)
 	if sessions.Default(c).Get(h.session.Key) != nil {
 		c.Redirect(http.StatusSeeOther, h.config.AdminPath)
+
 		return
 	}
 	flashes := s.Flashes()
@@ -32,7 +33,7 @@ func (h *AuthHandler) GetLogin(c *gin.Context) {
 	})
 }
 
-// PostLogin is the handler to check if the user can connect
+// PostLogin is the handler to check if the user can connect.
 func (h *AuthHandler) PostLogin(c *gin.Context) {
 	s := sessions.Default(c)
 	email := c.PostForm("email")
@@ -44,8 +45,8 @@ func (h *AuthHandler) PostLogin(c *gin.Context) {
 		if err := s.Save(); err != nil {
 			h.logger.Errorf("Unable to save session: %v", err)
 		}
-
 		c.Redirect(http.StatusSeeOther, h.config.LoginPath)
+
 		return
 	}
 	s.Set(h.session.Key, user.ID)
@@ -53,12 +54,13 @@ func (h *AuthHandler) PostLogin(c *gin.Context) {
 	if err != nil {
 		h.logger.Errorf("Unable to save session: %v", err)
 		c.Redirect(http.StatusSeeOther, h.config.LoginPath)
+
 		return
 	}
 	c.Redirect(http.StatusSeeOther, "/"+h.config.AdminPath)
 }
 
-// GetLogout allows the user to disconnect
+// GetLogout allows the user to disconnect.
 func (h *AuthHandler) GetLogout(c *gin.Context) {
 	s := sessions.Default(c)
 	s.Delete(h.session.Key)
@@ -68,7 +70,7 @@ func (h *AuthHandler) GetLogout(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, h.config.LoginPath)
 }
 
-// NewAuthHandler returns a new handler object
+// NewAuthHandler returns a new handler object.
 func NewAuthHandler(
 	s *session.Session, u UserLoginer, l ErrorLogger,
 ) *AuthHandler {

@@ -4,10 +4,10 @@ import (
 	"time"
 )
 
-// BaseInitializer initializes the generator
+// BaseInitializer initializes the generator.
 type BaseInitializer struct{}
 
-// setDefaultBegin sets the begin
+// setDefaultBegin sets the begin.
 func (i *BaseInitializer) setDefaultBegin(gen *Generator) {
 	if gen.Begin.IsZero() {
 		d := time.Now()
@@ -18,44 +18,44 @@ func (i *BaseInitializer) setDefaultBegin(gen *Generator) {
 	}
 }
 
-// DayInitializer initializes the generator
+// DayInitializer initializes the generator.
 type DayInitializer struct {
 	BaseInitializer
 }
 
-// Init initializes the generator
+// Init initializes the generator.
 func (i *DayInitializer) Init(gen *Generator) {
 	i.setDefaultBegin(gen)
 	gen.End = gen.Begin
 }
 
-// WeekInitializer initializes the generator
+// WeekInitializer initializes the generator.
 type WeekInitializer struct {
 	BaseInitializer
 }
 
-// Init initializes the generator
+// Init initializes the generator.
 func (i *WeekInitializer) Init(gen *Generator) {
 	i.setDefaultBegin(gen)
 	days := 6
 	gen.End = gen.Begin.AddDate(0, 0, days)
 }
 
-// MonthInitializer initializes the generator
+// MonthInitializer initializes the generator.
 type MonthInitializer struct {
 	BaseInitializer
 }
 
-// Init initializes the generator
+// Init initializes the generator.
 func (i *MonthInitializer) Init(gen *Generator) {
 	i.setDefaultBegin(gen)
 	gen.End = gen.Begin.AddDate(0, 1, 0)
 }
 
-// YearInitializer initializes the generator
+// YearInitializer initializes the generator.
 type YearInitializer struct{}
 
-// Init initializes the generator
+// Init initializes the generator.
 func (i *YearInitializer) Init(gen *Generator) {
 	if gen.Begin.IsZero() {
 		gen.Begin = time.Now()

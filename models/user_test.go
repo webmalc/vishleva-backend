@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Must set the user password
+// Must set the user password.
 func TestUser_SetPassword(t *testing.T) {
 	u := User{}
 	err := u.SetPassword("password")
@@ -18,7 +18,7 @@ func TestUser_SetPassword(t *testing.T) {
 	assert.NotNil(t, err)
 }
 
-// Must return the user name
+// Must return the user name.
 func TestUser_DisplayName(t *testing.T) {
 	u := User{}
 	u.Email = "test@example.com"

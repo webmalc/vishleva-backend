@@ -11,7 +11,7 @@ type Config struct {
 	IsDebug      bool
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	d := "host=localhost port=5432 "
 	d += "user=postgres dbname=vishleva_backend password=postgres"
@@ -28,5 +28,6 @@ func NewConfig() *Config {
 		DatabaseType: viper.GetString("database_type"),
 		IsDebug:      !viper.GetBool("is_prod"),
 	}
+
 	return config
 }

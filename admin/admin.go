@@ -9,7 +9,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/session"
 )
 
-// Admin is the admin structure
+// Admin is the admin structure.
 type Admin struct {
 	config            *Config
 	admin             *admin.Admin
@@ -18,7 +18,7 @@ type Admin struct {
 	resourceFunctions []ResourceInitializer
 }
 
-// Init initializes the admin
+// Init initializes the admin.
 func (a *Admin) Init() {
 	a.admin = admin.New(&admin.AdminConfig{
 		DB:       a.db,
@@ -38,19 +38,20 @@ func (a *Admin) Init() {
 	}
 }
 
-// GetBasePath returns the base admin path
+// GetBasePath returns the base admin path.
 func (a *Admin) GetBasePath() string {
 	return a.config.AdminPath
 }
 
-// Mount mounts the admin
+// Mount mounts the admin.
 func (a *Admin) Mount() *http.ServeMux {
 	mux := http.NewServeMux()
 	a.admin.MountTo(a.GetBasePath(), mux)
+
 	return mux
 }
 
-// NewAdmin returns a new admin object
+// NewAdmin returns a new admin object.
 func NewAdmin(db *gorm.DB, s *session.Session) *Admin {
 	config := NewConfig()
 	a := Admin{
@@ -66,5 +67,6 @@ func NewAdmin(db *gorm.DB, s *session.Session) *Admin {
 		},
 	}
 	a.Init()
+
 	return &a
 }

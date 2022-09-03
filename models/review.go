@@ -7,7 +7,7 @@ import (
 	"github.com/qor/sorting"
 )
 
-// Review is a model
+// Review is a model.
 type Review struct {
 	gorm.Model
 	sorting.Sorting
@@ -19,7 +19,7 @@ type Review struct {
 	IsEnabled bool  `gorm:"type:bool;default:false;index"`
 }
 
-// MarshalJSON returns the JSON respresentation
+// MarshalJSON returns the JSON respresentation.
 func (t *Review) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
 		Content      string `json:"content"`

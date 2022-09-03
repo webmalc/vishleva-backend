@@ -26,5 +26,6 @@ func NewConnection() *Database {
 	validations.RegisterCallbacks(db)
 	sorting.RegisterCallbacks(db)
 	media.RegisterCallbacks(db)
+
 	return &Database{db}
 }

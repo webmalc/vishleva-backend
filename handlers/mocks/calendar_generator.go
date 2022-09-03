@@ -15,5 +15,6 @@ type CalendarGenerator struct {
 // Get is a method mock.
 func (m *CalendarGenerator) Get(begin time.Time) []*models.CalendarDay {
 	arg := m.Called()
+
 	return arg.Get(0).([]*models.CalendarDay)
 }

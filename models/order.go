@@ -9,7 +9,7 @@ import (
 	"github.com/webmalc/vishleva-backend/services"
 )
 
-// Order is a model
+// Order is a model.
 type Order struct {
 	gorm.Model
 	Name     string          `gorm:"size:255;not null;index" valid:"required"`
@@ -23,7 +23,7 @@ type Order struct {
 	Status   string          `gorm:"index;not null;default:'not_confirmed'" valid:"required"`
 }
 
-// Validate validates the client
+// Validate validates the client.
 func (t *Order) Validate(db *gorm.DB) {
 	c := NewConfig()
 	if t.Begin.After(*t.End) || t.Begin.Equal(*t.End) {

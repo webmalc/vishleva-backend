@@ -9,12 +9,12 @@ import (
 	"github.com/webmalc/vishleva-backend/services"
 )
 
-// UserRepository is the user repository
+// UserRepository is the user repository.
 type UserRepository struct {
 	db *gorm.DB
 }
 
-// LoginAndReturnUser logins a user and return the user struct
+// LoginAndReturnUser logins a user and return the user struct.
 func (r *UserRepository) LoginAndReturnUser(
 	email, password string,
 ) (*models.User, error) {
@@ -32,7 +32,7 @@ func (r *UserRepository) LoginAndReturnUser(
 	return &u, nil
 }
 
-// NewUserRepository return a new user repository struct
+// NewUserRepository return a new user repository struct.
 func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db: db}
 }

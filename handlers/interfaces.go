@@ -11,37 +11,37 @@ type ErrorLogger interface {
 	Errorf(format string, args ...interface{})
 }
 
-// UserLoginer logs users
+// UserLoginer logs users.
 type UserLoginer interface {
 	LoginAndReturnUser(email, password string) (*models.User, error)
 }
 
-// TariffsGetter gets entries
+// TariffsGetter gets entries.
 type TariffsGetter interface {
 	GetAll() ([]models.Tariff, []error)
 }
 
-// TagsGetter gets entries
+// TagsGetter gets entries.
 type TagsGetter interface {
 	GetAll() ([]models.Tag, []error)
 }
 
-// ReviewsGetter gets entries
+// ReviewsGetter gets entries.
 type ReviewsGetter interface {
 	GetAll() ([]models.Review, []error)
 }
 
-// CollectionsGetter gets entries
+// CollectionsGetter gets entries.
 type CollectionsGetter interface {
 	GetAll() ([]models.Collection, []error)
 }
 
-// ImagesGetter gets entries
+// ImagesGetter gets entries.
 type ImagesGetter interface {
 	GetAll(tag string, collectionID uint) ([]models.Image, []error)
 }
 
-// CalendarGenerator gets entries
+// CalendarGenerator gets entries.
 type CalendarGenerator interface {
 	Get(begin time.Time) []*models.CalendarDay
 }

@@ -34,6 +34,7 @@ func (r *imageResource) initCollection(a *admin.Admin) {
 			if r, ok := record.(*models.Collection); ok && r.ImageID != nil {
 				return fmt.Sprintf("image #%d", *r.ImageID)
 			}
+
 			return "-"
 		},
 		Config: &admin.SelectOneConfig{
@@ -60,7 +61,10 @@ func (r *imageResource) initTags(a *admin.Admin) {
 }
 
 func (r *imageResource) batchTags(argument *admin.ActionArgument) error {
-	tags := argument.Argument.(*models.Image)
+	tags, ok := argument.Argument.(*models.Image)
+	if !ok {
+		panic("admin: assertion error.")
+	}
 	for _, record := range argument.FindSelectedRecords() {
 		if newImage, ok := record.(*models.Image); ok {
 			if len(tags.Tags) > 0 {
@@ -72,6 +76,7 @@ func (r *imageResource) batchTags(argument *admin.ActionArgument) error {
 			}
 		}
 	}
+
 	return nil
 }
 

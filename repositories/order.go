@@ -7,12 +7,12 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// OrderRepository is the repository
+// OrderRepository is the repository.
 type OrderRepository struct {
 	db *gorm.DB
 }
 
-// GetAll returns all entries
+// GetAll returns all entries.
 func (r *OrderRepository) GetUpcoming() ([]models.Order, []error) {
 	orders := []models.Order{}
 	d := time.Now()
@@ -20,10 +20,11 @@ func (r *OrderRepository) GetUpcoming() ([]models.Order, []error) {
 	r.db.Where(`"end" > ?`, m).
 		Not("status", []string{"not_confirmed", "closed"}).
 		Find(&orders)
+
 	return orders, r.db.GetErrors()
 }
 
-// NewOrderRepository returns a new repository struct
+// NewOrderRepository returns a new repository struct.
 func NewOrderRepository(db *gorm.DB) *OrderRepository {
 	return &OrderRepository{db: db}
 }

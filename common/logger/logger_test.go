@@ -11,6 +11,7 @@ import (
 func newMockLogger() (*Logger, *mocks.BaseLogger) {
 	c := NewConfig()
 	m := &mocks.BaseLogger{}
+
 	return &Logger{logger: m, config: c}, m
 }
 
@@ -70,7 +71,7 @@ func TestLogger_Fatalf(t *testing.T) {
 	m.AssertExpectations(t)
 }
 
-// Should create a new logger
+// Should create a new logger.
 func TestNewLogger(t *testing.T) {
 	l := NewLogger()
 	assert.NotNil(t, l)
@@ -78,7 +79,7 @@ func TestNewLogger(t *testing.T) {
 	assert.NotNil(t, l.logger)
 }
 
-// Should panic
+// Should panic.
 func TestNewLoggerPanic(t *testing.T) {
 	o := viper.Get(filePathKey)
 	defer viper.Set(filePathKey, o)

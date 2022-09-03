@@ -79,7 +79,7 @@ func checkResponse(t *testing.T, url string, count int) {
 	assert.Len(t, entries, count)
 }
 
-// initRoutes initializes the router
+// initRoutes initializes the router.
 func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	log := logger.NewLogger()
 	conn := db.NewConnection()
@@ -114,17 +114,18 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 	createReviews(conn)
 	createCollections(conn)
 	createImages(conn)
+
 	return w, engine
 }
 
-// Should return the config object
+// Should return the config object.
 func TestNewConfig(t *testing.T) {
 	c := NewConfig()
 	assert.Equal(t, "admin", c.AdminPath)
 	assert.Equal(t, "/auth/login", c.LoginPath)
 }
 
-// Setups the tests
+// Setups the tests.
 func TestMain(m *testing.M) {
 	if err := os.Chdir("../"); err != nil {
 		panic(err)

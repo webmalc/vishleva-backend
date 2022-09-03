@@ -26,13 +26,19 @@ func (r *userResource) passwordSetter(
 	metaValue *resource.MetaValue,
 	context *qor.Context,
 ) {
-	values := metaValue.Value.([]string)
+	values, ok := metaValue.Value.([]string)
+	if !ok {
+		panic("admin: assertion error.")
+	}
 	if len(values) > 0 {
 		pwd := values[0]
 		if pwd == "" {
 			return
 		}
-		u := res.(*models.User)
+		u, ok := res.(*models.User)
+		if !ok {
+			panic("admin: assertion error.")
+		}
 		err := u.SetPassword(pwd)
 		if err != nil {
 			context.DB.AddError( // nolint // unnecessary: errcheck

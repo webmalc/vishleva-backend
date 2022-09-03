@@ -7,5 +7,6 @@ type Config struct {
 // NewConfig returns the configuration object.
 func NewConfig() *Config {
 	config := &Config{}
+
 	return config
 }

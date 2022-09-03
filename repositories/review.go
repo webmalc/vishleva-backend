@@ -5,12 +5,12 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// ReviewRepository is the repository
+// ReviewRepository is the repository.
 type ReviewRepository struct {
 	db *gorm.DB
 }
 
-// GetAll returns all entries
+// GetAll returns all entries.
 func (r *ReviewRepository) GetAll() ([]models.Review, []error) {
 	reviews := []models.Review{}
 	r.db.Preload("Client").Preload("Image").
@@ -19,7 +19,7 @@ func (r *ReviewRepository) GetAll() ([]models.Review, []error) {
 	return reviews, r.db.GetErrors()
 }
 
-// NewReviewRepository returns a new repository struct
+// NewReviewRepository returns a new repository struct.
 func NewReviewRepository(db *gorm.DB) *ReviewRepository {
 	return &ReviewRepository{db: db}
 }

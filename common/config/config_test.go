@@ -30,13 +30,13 @@ func TestSetup(t *testing.T) {
 	assert.Contains(t, path, "logs/app.test.log")
 }
 
-// Should panic with the invalid environment variable
+// Should panic with the invalid environment variable.
 func TestSetupPanic(t *testing.T) {
 	os.Setenv("VISHLEVA_ENV", "invalid")
 	assert.Panics(t, Setup)
 }
 
-// Should set default values
+// Should set default values.
 func Test_setDefaults(t *testing.T) {
 	viper.Reset()
 	assert.Empty(t, viper.GetString("log_path"))

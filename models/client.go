@@ -7,7 +7,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Client is a model
+// Client is a model.
 type Client struct {
 	gorm.Model
 	Name    string  `gorm:"size:255;not null;index"`
@@ -17,7 +17,7 @@ type Client struct {
 	Phone   string  `gorm:"size:255;index;" valid:"numeric"`
 }
 
-// Validate validates the client
+// Validate validates the client.
 func (t *Client) Validate(db *gorm.DB) {
 	if t.Name == "" {
 		_ = db.AddError(errors.New(
@@ -26,7 +26,7 @@ func (t *Client) Validate(db *gorm.DB) {
 	}
 }
 
-// MarshalJSON returns the JSON respresentation
+// MarshalJSON returns the JSON respresentation.
 func (t *Client) MarshalJSON() ([]byte, error) {
 	return json.Marshal(t.Name)
 }

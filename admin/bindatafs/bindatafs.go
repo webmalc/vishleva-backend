@@ -14,13 +14,13 @@ import (
 	"github.com/qor/assetfs"
 )
 
-// AssetFSInterface is the AssetFS interface
+// AssetFSInterface is the AssetFS interface.
 type AssetFSInterface interface {
 	assetfs.Interface
 	FileServer(dir http.Dir, assetPaths ...string) http.Handler
 }
 
-// AssetFS is the AssetFS structure
+// AssetFS is the AssetFS structure.
 var AssetFS AssetFSInterface = &bindataFS{AssetFileSystem: &assetfs.AssetFileSystem{}, Path: "admin/bindatafs"}
 
 func init() {

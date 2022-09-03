@@ -13,5 +13,6 @@ type CollectionsGetter struct {
 // GetAll is method mock.
 func (m *CollectionsGetter) GetAll() ([]models.Collection, []error) {
 	arg := m.Called()
+
 	return arg.Get(0).([]models.Collection), nil
 }

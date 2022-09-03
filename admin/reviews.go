@@ -30,6 +30,7 @@ func (u *reviewResource) init(a *admin.Admin) {
 			if r, ok := record.(*models.Review); ok && r.ImageID != nil {
 				return fmt.Sprintf("image #%d", *r.ImageID)
 			}
+
 			return "-"
 		},
 		Config: &admin.SelectOneConfig{

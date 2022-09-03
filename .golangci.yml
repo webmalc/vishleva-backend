@@ -72,7 +72,7 @@ linters:
     - gocyclo
     - godot
     - godox
-    - goerr113
+    # - goerr113
     - gofmt
     - goimports
     - gomnd
@@ -135,7 +135,7 @@ issues:
         - gomnd
         - dupl
         - noctx
-    - path: .*mocks.*
+    - path: .*mocks/.*
       linters:
         - forcetypeassert
     - path: app_test\.go
@@ -146,6 +146,3 @@ issues:
     - linters:
         - lll
       source: "`.*"
-# run:
-#   skip-dirs:
-#     - test/testdata_etc

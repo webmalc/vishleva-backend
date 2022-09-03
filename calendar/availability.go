@@ -6,18 +6,19 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// WorkingHoursAvailabilitySetter is the availability setter
+// WorkingHoursAvailabilitySetter is the availability setter.
 type WorkingHoursAvailabilitySetter struct {
 	config *Config
 }
 
-// Init initializes the setter
+// Init initializes the setter.
 func (s *WorkingHoursAvailabilitySetter) Init() {}
 
-// Set sets a slot availability
+// Set sets a slot availability.
 func (s *WorkingHoursAvailabilitySetter) Set(slot *models.CalendarSlot) {
 	if slot.Begin.Hour() < s.config.StartHour {
 		slot.IsOpen = false
+
 		return
 	}
 	if s.config.EndHour > 0 && slot.Begin.Hour() >= s.config.EndHour {
@@ -74,5 +75,6 @@ func NewOrdersAvailabilitySetter(
 		format:      "2006-01-02 15:04",
 		closedHours: make(map[string]bool),
 	}
+
 	return o
 }

@@ -5,12 +5,12 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// ImageRepository is the repository
+// ImageRepository is the repository.
 type ImageRepository struct {
 	db *gorm.DB
 }
 
-// GetAll returns all entries
+// GetAll returns all entries.
 func (r *ImageRepository) GetAll(
 	tag string,
 	collectionID uint,
@@ -37,10 +37,11 @@ func (r *ImageRepository) GetAll(
 		query = query.Where("id IN (?)", ids)
 	}
 	query.Find(&images)
+
 	return images, r.db.GetErrors()
 }
 
-// NewImageRepository returns a new repository struct
+// NewImageRepository returns a new repository struct.
 func NewImageRepository(db *gorm.DB) *ImageRepository {
 	return &ImageRepository{db: db}
 }

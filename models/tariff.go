@@ -10,7 +10,7 @@ import (
 	"github.com/webmalc/vishleva-backend/services"
 )
 
-// Tariff is a model
+// Tariff is a model.
 type Tariff struct {
 	gorm.Model
 	sorting.Sorting
@@ -25,7 +25,7 @@ type Tariff struct {
 	IsPrimary    bool            `gorm:"type:bool;default:false;index"`
 }
 
-// Validate validates the struct
+// Validate validates the struct.
 func (t *Tariff) Validate(db *gorm.DB) {
 	services.IsPositiveValidator(t.Price, "price", db)
 	services.IsPositiveValidator(t.Duration, "duration", db)
@@ -39,7 +39,7 @@ func (t *Tariff) Validate(db *gorm.DB) {
 	}
 }
 
-// MarshalJSON returns the JSON respresentation
+// MarshalJSON returns the JSON respresentation.
 func (t *Tariff) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
 		Name         string `json:"name"`

@@ -7,10 +7,10 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Generator is the bindatafs structure
+// Generator is the bindatafs structure.
 type Generator struct{}
 
-// Run runs the generator
+// Run runs the generator.
 func (g *Generator) Run(args []string) {
 	assetFS := AssetFS.NameSpace("admin")
 
@@ -27,7 +27,7 @@ func (g *Generator) Run(args []string) {
 	}
 }
 
-// NewGenerator return a new generator
+// NewGenerator return a new generator.
 func NewGenerator() *Generator {
 	return &Generator{}
 }

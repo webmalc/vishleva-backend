@@ -21,7 +21,7 @@ import (
 	"github.com/webmalc/vishleva-backend/server/mocks"
 )
 
-// Should init the logger
+// Should init the logger.
 func TestServer_initLogger(t *testing.T) {
 	assert.IsType(t, &os.File{}, gin.DefaultWriter)
 	l := &mocks.InfoLogger{}
@@ -101,7 +101,7 @@ func TestServer_Run(t *testing.T) {
 	resp.Body.Close()
 }
 
-// Should create the server
+// Should create the server.
 func TestNewServer(t *testing.T) {
 	l := &mocks.InfoLogger{}
 	r := &mocks.Router{}

@@ -13,5 +13,6 @@ type OrdersGetter struct {
 // GetAll is method mock.
 func (m *OrdersGetter) GetUpcoming() ([]models.Order, []error) {
 	arg := m.Called()
+
 	return arg.Get(0).([]models.Order), nil
 }

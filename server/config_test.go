@@ -9,7 +9,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/test"
 )
 
-// Should return the config object
+// Should return the config object.
 func TestNewConfig(t *testing.T) {
 	c := NewConfig()
 	assert.Equal(t, "9000", c.ServerPort)
@@ -23,7 +23,7 @@ func TestNewConfig(t *testing.T) {
 	assert.Contains(t, c.ServerAllowOrigins, "https://vishleva.com")
 }
 
-// Setups the tests
+// Setups the tests.
 func TestMain(m *testing.M) {
 	if err := os.Chdir("../"); err != nil {
 		panic(err)

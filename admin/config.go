@@ -13,7 +13,7 @@ type Config struct {
 	OrderStatuses []string
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("admin_path", "admin")
 	viper.SetDefault("site_name", "vishleva")
@@ -29,5 +29,6 @@ func NewConfig() *Config {
 		SiteName:      viper.GetString("site_name"),
 		OrderStatuses: viper.GetStringSlice("order_statuses"),
 	}
+
 	return config
 }

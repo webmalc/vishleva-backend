@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Router is the router
+// Router is the router.
 type Router struct {
 	admin       Admin
 	config      *Config
@@ -23,7 +23,7 @@ type Router struct {
 	cacheStore  *persistence.InMemoryStore
 }
 
-// mountAdmin mount the admin
+// mountAdmin mount the admin.
 func (r *Router) mountAdmin(e *gin.Engine) {
 	e.Any(
 		fmt.Sprintf("/%s/*resources", r.admin.GetBasePath()),
@@ -31,7 +31,7 @@ func (r *Router) mountAdmin(e *gin.Engine) {
 	)
 }
 
-// BindRoutes binds the routes
+// BindRoutes binds the routes.
 func (r *Router) BindRoutes(e *gin.Engine) {
 	r.mountAdmin(e)
 
@@ -69,7 +69,7 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	})
 }
 
-// NewRouter returns a new router object
+// NewRouter returns a new router object.
 func NewRouter(
 	admin Admin,
 	auth AuthHandler,
@@ -81,6 +81,7 @@ func NewRouter(
 	calendar ListHandler,
 ) *Router {
 	config := NewConfig()
+
 	return &Router{
 		config:      config,
 		admin:       admin,

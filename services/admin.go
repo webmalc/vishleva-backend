@@ -7,7 +7,7 @@ import (
 	"github.com/qor/admin"
 )
 
-// GetDateFilter return an admin date filter
+// GetDateFilter return an admin date filter.
 func GetDateFilter(
 	table, field string,
 ) func(*gorm.DB, *admin.FilterArgument) *gorm.DB {
@@ -24,6 +24,7 @@ func GetDateFilter(
 				d.Value,
 			)
 		}
+
 		return db
 	}
 }

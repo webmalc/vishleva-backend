@@ -17,7 +17,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/session"
 )
 
-// Server is the HTTP server structure
+// Server is the HTTP server structure.
 type Server struct {
 	logger           InfoLogger
 	config           *Config
@@ -27,7 +27,7 @@ type Server struct {
 	loggerPermission int
 }
 
-// initLogger setups the logger
+// initLogger setups the logger.
 func (s *Server) initLogger() {
 	file, err := os.OpenFile(
 		s.config.ServerLogPath,
@@ -40,7 +40,7 @@ func (s *Server) initLogger() {
 	gin.DefaultWriter = io.MultiWriter(file, os.Stdout)
 }
 
-// getCORS return the CORS middleware
+// getCORS return the CORS middleware.
 func (s *Server) getCORS() cors.Config {
 	config := cors.DefaultConfig()
 	if s.config.IsReleaseMode {
@@ -49,10 +49,11 @@ func (s *Server) getCORS() cors.Config {
 		config.AllowAllOrigins = true
 	}
 	config.AddAllowHeaders("Authorization")
+
 	return config
 }
 
-// setEngine sets the gin engine
+// setEngine sets the gin engine.
 func (s *Server) setEngine() {
 	s.initLogger()
 	if s.config.IsReleaseMode {
@@ -65,7 +66,7 @@ func (s *Server) setEngine() {
 	s.engine.Use(cors.New(s.getCORS()))
 }
 
-// Run runs the server
+// Run runs the server.
 func (s *Server) Run(ctx context.Context, args []string) {
 	s.setEngine()
 	httpServer := &http.Server{
@@ -79,7 +80,7 @@ func (s *Server) Run(ctx context.Context, args []string) {
 
 	go func() {
 		err := httpServer.ListenAndServe()
-		if err != nil && err != http.ErrServerClosed {
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
 			panic(errors.Wrap(err, "server"))
 		}
 	}()
@@ -101,7 +102,7 @@ func (s *Server) Run(ctx context.Context, args []string) {
 	}
 }
 
-// NewServer returns a new server object
+// NewServer returns a new server object.
 func NewServer(router Router, l InfoLogger, s *session.Session) *Server {
 	config := NewConfig()
 	server := Server{
@@ -111,5 +112,6 @@ func NewServer(router Router, l InfoLogger, s *session.Session) *Server {
 		session:          s,
 		loggerPermission: 0o600,
 	}
+
 	return &server
 }

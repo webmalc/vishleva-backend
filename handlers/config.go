@@ -16,5 +16,6 @@ func NewConfig() *Config {
 		AdminPath: viper.GetString("admin_path"),
 		LoginPath: viper.GetString("login_path"),
 	}
+
 	return config
 }

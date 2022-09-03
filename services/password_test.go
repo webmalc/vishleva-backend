@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/test"
 )
 
-// Should hash the password
+// Should hash the password.
 func TestHashPassword(t *testing.T) {
 	pass := []byte("password")
 	hash, err := HashPassword(pass)
@@ -18,7 +18,7 @@ func TestHashPassword(t *testing.T) {
 	assert.Contains(t, err.Error(), "is empty")
 }
 
-// Setups the tests
+// Setups the tests.
 func TestMain(m *testing.M) {
 	test.Run(m)
 }

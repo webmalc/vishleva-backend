@@ -51,6 +51,7 @@ func NewCommandRouter(
 	log ErrorLogger, server ContextRunner, bindata Runner,
 ) CommandRouter {
 	config := NewConfig()
+
 	return CommandRouter{
 		config:          config,
 		logger:          log,

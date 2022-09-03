@@ -18,7 +18,7 @@ type Config struct {
 	ServerShutdownTimeout time.Duration
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("server_port", "9000")
 	viper.SetDefault("server_host", "localhost")
@@ -45,5 +45,6 @@ func NewConfig() *Config {
 		ServerShutdownTimeout: viper.GetDuration("server_shutdown_timeout"),
 		ServerLogPath:         logPath,
 	}
+
 	return config
 }

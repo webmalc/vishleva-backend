@@ -45,7 +45,7 @@ func TestNewUserRepository(t *testing.T) {
 	assert.Equal(t, r.db, c.DB)
 }
 
-// Setups the tests
+// Setups the tests.
 func TestMain(m *testing.M) {
 	test.Run(m)
 }

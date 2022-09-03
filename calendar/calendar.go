@@ -7,7 +7,7 @@ import (
 )
 
 // TODO: test it
-// Generator is the calendar generator
+// Generator is the calendar generator.
 type Generator struct {
 	Begin               time.Time
 	End                 time.Time
@@ -15,7 +15,7 @@ type Generator struct {
 	availabilitySetters []AvailabilitySetter
 }
 
-// init setups the params
+// init setups the params.
 func (c *Generator) init() {
 	if c.Initializer == nil {
 		c.Initializer = &WeekInitializer{}
@@ -23,7 +23,7 @@ func (c *Generator) init() {
 	c.Initializer.Init(c)
 }
 
-// setSlotAvailability sets a slot availability
+// setSlotAvailability sets a slot availability.
 func (c *Generator) setSlotAvailability(slot *models.CalendarSlot) {
 	for _, setter := range c.availabilitySetters {
 		if !slot.IsOpen {
@@ -33,7 +33,7 @@ func (c *Generator) setSlotAvailability(slot *models.CalendarSlot) {
 	}
 }
 
-// generateSlots generate the slots
+// generateSlots generate the slots.
 func (c *Generator) generateSlots(d time.Time) []*models.CalendarSlot {
 	m := time.Date(d.Year(), d.Month(), d.Day(), 0, 0, 0, 0, time.Local)
 	n := m.AddDate(0, 0, 1)
@@ -47,10 +47,11 @@ func (c *Generator) generateSlots(d time.Time) []*models.CalendarSlot {
 		c.setSlotAvailability(&slot)
 		result = append(result, &slot)
 	}
+
 	return result
 }
 
-// Get returns the result
+// Get returns the result.
 func (c *Generator) Get(begin time.Time) []*models.CalendarDay {
 	c.Begin = begin
 	c.init()
@@ -66,14 +67,16 @@ func (c *Generator) Get(begin time.Time) []*models.CalendarDay {
 		}
 		result = append(result, &day)
 	}
+
 	return result
 }
 
-// NewGenerator returns a new server object
+// NewGenerator returns a new server object.
 func NewGenerator(getter OrdersGetter) *Generator {
 	calendar := Generator{availabilitySetters: []AvailabilitySetter{
 		NewWorkingHoursAvailabilitySetter(),
 		NewOrdersAvailabilitySetter(getter),
 	}}
+
 	return &calendar
 }

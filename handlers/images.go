@@ -7,12 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ImagesHandler is handler
+// ImagesHandler is handler.
 type ImagesHandler struct {
 	getter ImagesGetter
 }
 
-// GetList returns the list handler function
+// GetList returns the list handler function.
 func (h *ImagesHandler) GetList(c *gin.Context) {
 	collection := 0
 	if v, err := strconv.Atoi(c.Query("collection")); err == nil && v > 0 {
@@ -27,7 +27,7 @@ func (h *ImagesHandler) GetList(c *gin.Context) {
 	})
 }
 
-// NewImagesHandler returns a new router object
+// NewImagesHandler returns a new router object.
 func NewImagesHandler(getter ImagesGetter) *ImagesHandler {
 	return &ImagesHandler{getter: getter}
 }

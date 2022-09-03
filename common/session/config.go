@@ -11,7 +11,7 @@ type Config struct {
 	SessionSecret string
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("session_name", "vishleva_admin_session")
 	viper.SetDefault("session_key", "vishleva_user_id")
@@ -25,5 +25,6 @@ func NewConfig() *Config {
 		SessionName:   viper.GetString("session_name"),
 		SessionSecret: viper.GetString("secret"),
 	}
+
 	return config
 }

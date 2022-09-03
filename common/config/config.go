@@ -12,17 +12,18 @@ import (
 
 const prefix = "vishleva"
 
-// getFilename returns filename based on the environment variable
+// getFilename returns filename based on the environment variable.
 func getFilename() string {
 	fileName := "config"
 	env := os.Getenv(strings.ToUpper(prefix + "_env"))
 	if env != "" {
 		fileName += "." + env
 	}
+
 	return fileName
 }
 
-// setDefaults sets default values
+// setDefaults sets default values.
 func setDefaults(baseDir string) {
 	viper.Set("base_dir", filepath.Dir(filepath.Dir(baseDir))+"/")
 	viper.SetDefault("is_prod", false)
@@ -30,7 +31,7 @@ func setDefaults(baseDir string) {
 	viper.SetDefault("log_path", "logs/app.log")
 }
 
-// setPaths set paths
+// setPaths set paths.
 func setPaths(baseDir string) {
 	viper.AddConfigPath(".")
 	viper.AddConfigPath(baseDir + "/yaml")
@@ -38,28 +39,29 @@ func setPaths(baseDir string) {
 	viper.AddConfigPath("$HOME/." + prefix)
 }
 
-// setEnv sets the environment
+// setEnv sets the environment.
 func setEnv() {
 	viper.SetEnvPrefix(prefix)
 	viper.AutomaticEnv()
 }
 
-// getBaseDir get the base directory
+// getBaseDir get the base directory.
 func getBaseDir() string {
 	_, b, _, ok := runtime.Caller(0)
 	if !ok {
 		panic("config: unable to determine the caller.")
 	}
+
 	return filepath.Dir(b)
 }
 
-// setTimezone sets timezone
+// setTimezone sets timezone.
 func SetTimezone() {
 	loc, _ := time.LoadLocation(viper.GetString("timezone"))
 	time.Local = loc
 }
 
-// read reads configuration
+// read reads configuration.
 func read() {
 	if err := viper.ReadInConfig(); err != nil {
 		panic(err)

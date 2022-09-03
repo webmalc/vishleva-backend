@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/test"
 )
 
-// Should return the config object
+// Should return the config object.
 func TestNewConfig(t *testing.T) {
 	c := NewConfig()
 	assert.Equal(t, "vishleva_admin_session_test", c.SessionName)
@@ -15,7 +15,7 @@ func TestNewConfig(t *testing.T) {
 	assert.Equal(t, "secret_password_test", c.SessionSecret)
 }
 
-// Setups the tests
+// Setups the tests.
 func TestMain(m *testing.M) {
 	test.Run(m)
 }

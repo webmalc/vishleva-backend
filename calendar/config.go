@@ -10,7 +10,7 @@ type Config struct {
 	EndHour   int
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("calendar_start_hour", 7) // nolint // unnecessary: unparam
 	viper.SetDefault("calendar_end_hour", 22)  // nolint // unnecessary: unparam
@@ -23,5 +23,6 @@ func NewConfig() *Config {
 		StartHour: viper.GetInt("calendar_start_hour"),
 		EndHour:   viper.GetInt("calendar_end_hour"),
 	}
+
 	return config
 }

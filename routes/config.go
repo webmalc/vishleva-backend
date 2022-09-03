@@ -23,5 +23,6 @@ func NewConfig() *Config {
 	config := &Config{
 		CacheTimeout: viper.GetDuration("cache_timeout_hours"),
 	}
+
 	return config
 }

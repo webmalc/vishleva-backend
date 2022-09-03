@@ -16,5 +16,6 @@ func NewConfig() *Config {
 		FilePath: viper.GetString("base_dir") + viper.GetString("log_path"),
 		IsDebug:  !viper.GetBool("is_prod"),
 	}
+
 	return config
 }
