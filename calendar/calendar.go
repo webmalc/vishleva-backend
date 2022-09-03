@@ -58,7 +58,7 @@ func (c *Generator) Get(begin time.Time) []*models.CalendarDay {
 		setter.Init()
 	}
 	result := []*models.CalendarDay{}
-	for d := c.Begin; !d.After(c.End); d = d.AddDate(0, 0, 1) {
+	for d := c.Begin; d.Before(c.End.AddDate(0, 0, 1)); d = d.AddDate(0, 0, 1) {
 		day := models.CalendarDay{
 			Day:       d,
 			IsWeekend: d.Weekday() == time.Sunday || d.Weekday() == time.Saturday,
@@ -72,8 +72,8 @@ func (c *Generator) Get(begin time.Time) []*models.CalendarDay {
 // NewGenerator returns a new server object
 func NewGenerator(getter OrdersGetter) *Generator {
 	calendar := Generator{availabilitySetters: []AvailabilitySetter{
-		NewWorkingHoursAvailalabilitySetter(),
-		NewOrdersAvailalabilitySetter(getter),
+		NewWorkingHoursAvailabilitySetter(),
+		NewOrdersAvailabilitySetter(getter),
 	}}
 	return &calendar
 }

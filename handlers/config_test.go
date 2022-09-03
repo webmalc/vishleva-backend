@@ -69,7 +69,7 @@ func createTariffs(conn *db.Database) {
 
 func checkResponse(t *testing.T, url string, count int) {
 	w, engine := initRoutes()
-	req, _ := http.NewRequest("GET", url, nil)
+	req, _ := http.NewRequest("GET", url, http.NoBody)
 	engine.ServeHTTP(w, req)
 	assert.Equal(t, 200, w.Code)
 	json, err := simplejson.NewFromReader(w.Body)

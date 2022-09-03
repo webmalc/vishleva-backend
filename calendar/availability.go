@@ -25,12 +25,12 @@ func (s *WorkingHoursAvailabilitySetter) Set(slot *models.CalendarSlot) {
 	}
 }
 
-// NewWorkingHoursAvailalabilitySetter return a new object
-func NewWorkingHoursAvailalabilitySetter() *WorkingHoursAvailabilitySetter {
+// NewWorkingHoursAvailabilitySetter return a new object.
+func NewWorkingHoursAvailabilitySetter() *WorkingHoursAvailabilitySetter {
 	return &WorkingHoursAvailabilitySetter{config: NewConfig()}
 }
 
-// OrdersAvailabilitySetter is the availability setter
+// OrdersAvailabilitySetter is the availability setter.
 type OrdersAvailabilitySetter struct {
 	getter      OrdersGetter
 	closedHours map[string]bool
@@ -58,15 +58,15 @@ func (s *OrdersAvailabilitySetter) Init() {
 	}
 }
 
-// Set sets a slot availability
+// Set sets a slot availability.
 func (s *OrdersAvailabilitySetter) Set(slot *models.CalendarSlot) {
 	if s.closedHours[slot.Begin.Format(s.format)] {
 		slot.IsOpen = false
 	}
 }
 
-// NewWorkingHoursAvailalabilitySetter return a new object
-func NewOrdersAvailalabilitySetter(
+// NewWorkingHoursAvailabilitySetter return a new object.
+func NewOrdersAvailabilitySetter(
 	getter OrdersGetter,
 ) *OrdersAvailabilitySetter {
 	o := &OrdersAvailabilitySetter{

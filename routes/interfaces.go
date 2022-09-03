@@ -12,14 +12,14 @@ type Admin interface {
 	GetBasePath() string
 }
 
-// AuthHander is the handler interface
-type AuthHander interface {
+// AuthHandler is the handler interface
+type AuthHandler interface {
 	GetLogin(c *gin.Context)
 	PostLogin(c *gin.Context)
 	GetLogout(c *gin.Context)
 }
 
-// ListHander is the handler interface
-type ListHander interface {
+// ListHandler is the handler interface
+type ListHandler interface {
 	GetList(c *gin.Context)
 }

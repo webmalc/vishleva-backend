@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestTariffsHander_GetList(t *testing.T) {
+func TestTariffsHandler_GetList(t *testing.T) {
 	checkResponse(t, "/api/tariffs", 1)
 }
 

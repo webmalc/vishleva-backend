@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestTagsHander_GetList(t *testing.T) {
+func TestTagsHandler_GetList(t *testing.T) {
 	checkResponse(t, "/api/tags", 2)
 }
 

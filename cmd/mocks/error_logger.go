@@ -9,7 +9,7 @@ type ErrorLogger struct {
 	mock.Mock
 }
 
-// Error is method mock
+// Error is method mock.
 func (m *ErrorLogger) Error(args ...interface{}) {
 	m.Called(args...)
 }

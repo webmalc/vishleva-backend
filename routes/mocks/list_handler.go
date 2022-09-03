@@ -5,12 +5,12 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-// ListHander mocks the object
-type ListHander struct {
+// ListHandler mocks the object
+type ListHandler struct {
 	mock.Mock
 }
 
 // GetList is method mock
-func (m *ListHander) GetList(c *gin.Context) {
+func (m *ListHandler) GetList(c *gin.Context) {
 	m.Called(c)
 }

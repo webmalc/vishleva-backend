@@ -85,7 +85,7 @@ func (s *Server) Run(ctx context.Context, args []string) {
 	}()
 	quit := make(chan os.Signal, 1)
 
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(quit, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM)
 	select {
 	case result := <-quit:
 		s.logger.Infof("Shutdown the HTTP server. Signal: %v", result)
@@ -109,7 +109,7 @@ func NewServer(router Router, l InfoLogger, s *session.Session) *Server {
 		logger:           l,
 		router:           router,
 		session:          s,
-		loggerPermission: 0600,
+		loggerPermission: 0o600,
 	}
 	return &server
 }

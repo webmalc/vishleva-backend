@@ -12,7 +12,7 @@ type Config struct {
 	CacheTimeout time.Duration
 }
 
-// setDefaults sets the default values
+// setDefaults sets the default values.
 func setDefaults() {
 	viper.SetDefault("cache_timeout_hours", fmt.Sprintf("%dh", 24*7)) // nolint // unnecessary: unparam
 }

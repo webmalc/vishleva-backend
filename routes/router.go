@@ -13,13 +13,13 @@ import (
 type Router struct {
 	admin       Admin
 	config      *Config
-	auth        AuthHander
-	tariffs     ListHander
-	tags        ListHander
-	reviews     ListHander
-	collections ListHander
-	images      ListHander
-	calendar    ListHander
+	auth        AuthHandler
+	tariffs     ListHandler
+	tags        ListHandler
+	reviews     ListHandler
+	collections ListHandler
+	images      ListHandler
+	calendar    ListHandler
 	cacheStore  *persistence.InMemoryStore
 }
 
@@ -72,13 +72,13 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 // NewRouter returns a new router object
 func NewRouter(
 	admin Admin,
-	auth AuthHander,
-	tariffs ListHander,
-	tags ListHander,
-	reviews ListHander,
-	collections ListHander,
-	images ListHander,
-	calendar ListHander,
+	auth AuthHandler,
+	tariffs ListHandler,
+	tags ListHandler,
+	reviews ListHandler,
+	collections ListHandler,
+	images ListHandler,
+	calendar ListHandler,
 ) *Router {
 	config := NewConfig()
 	return &Router{

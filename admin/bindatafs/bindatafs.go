@@ -3,7 +3,6 @@ package bindatafs
 import (
 	"crypto/md5"
 	"fmt"
-	"io/ioutil"
 	"mime"
 	"net/http"
 	"os"
@@ -185,8 +184,8 @@ func copyFiles(templatesPath string, viewPaths []viewPath) {
 				if info.IsDir() {
 					err = os.MkdirAll(filepath.Join(templatesPath, relativePath), os.ModePerm)
 				} else if info.Mode().IsRegular() {
-					if source, err := ioutil.ReadFile(path); err == nil {
-						if err = ioutil.WriteFile(filepath.Join(templatesPath, relativePath), source, os.ModePerm); err != nil {
+					if source, err := os.ReadFile(path); err == nil {
+						if err = os.WriteFile(filepath.Join(templatesPath, relativePath), source, os.ModePerm); err != nil {
 							fmt.Println(err)
 						}
 					}

@@ -8,8 +8,8 @@ import (
 	"github.com/webmalc/vishleva-backend/common/session"
 )
 
-// AuthHander is auth handler
-type AuthHander struct {
+// AuthHandler is auth handler
+type AuthHandler struct {
 	session     *session.Session
 	userLoginer UserLoginer
 	logger      ErrorLogger
@@ -17,7 +17,7 @@ type AuthHander struct {
 }
 
 // GetLogin returns the login handler function
-func (h *AuthHander) GetLogin(c *gin.Context) {
+func (h *AuthHandler) GetLogin(c *gin.Context) {
 	s := sessions.Default(c)
 	if sessions.Default(c).Get(h.session.Key) != nil {
 		c.Redirect(http.StatusSeeOther, h.config.AdminPath)
@@ -33,7 +33,7 @@ func (h *AuthHander) GetLogin(c *gin.Context) {
 }
 
 // PostLogin is the handler to check if the user can connect
-func (h *AuthHander) PostLogin(c *gin.Context) {
+func (h *AuthHandler) PostLogin(c *gin.Context) {
 	s := sessions.Default(c)
 	email := c.PostForm("email")
 	password := c.PostForm("password")
@@ -59,7 +59,7 @@ func (h *AuthHander) PostLogin(c *gin.Context) {
 }
 
 // GetLogout allows the user to disconnect
-func (h *AuthHander) GetLogout(c *gin.Context) {
+func (h *AuthHandler) GetLogout(c *gin.Context) {
 	s := sessions.Default(c)
 	s.Delete(h.session.Key)
 	if err := s.Save(); err != nil {
@@ -71,8 +71,8 @@ func (h *AuthHander) GetLogout(c *gin.Context) {
 // NewAuthHandler returns a new handler object
 func NewAuthHandler(
 	s *session.Session, u UserLoginer, l ErrorLogger,
-) *AuthHander {
-	return &AuthHander{
+) *AuthHandler {
+	return &AuthHandler{
 		session:     s,
 		userLoginer: u,
 		config:      NewConfig(),

@@ -49,7 +49,7 @@ func TestMonthInitializer_Init(t *testing.T) {
 	i.Init(ca)
 	assert.False(t, ca.Begin.IsZero())
 	assert.False(t, ca.End.IsZero())
-	assert.GreaterOrEqual(t, int(ca.End.Sub(ca.Begin).Hours()/24), 30)
+	assert.GreaterOrEqual(t, int(ca.End.Sub(ca.Begin).Hours()/24), 28)
 }
 
 func TestYearInitializer_Init(t *testing.T) {

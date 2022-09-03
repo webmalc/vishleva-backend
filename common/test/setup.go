@@ -7,13 +7,13 @@ import (
 	"github.com/webmalc/vishleva-backend/common/config"
 )
 
-// Setups the tests
+// Setups the tests.
 func setUp() {
 	os.Setenv("VISHLEVA_ENV", "test")
 	config.Setup()
 }
 
-// Run setups, runs and teardowns the tests
+// Run setups, runs and teardown the tests.
 func Run(m *testing.M) {
 	setUp()
 	code := m.Run()

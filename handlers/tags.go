@@ -6,13 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// TagsHander is handler
-type TagsHander struct {
+// TagsHandler is handler
+type TagsHandler struct {
 	getter TagsGetter
 }
 
 // GetList returns the list handler function
-func (h *TagsHander) GetList(c *gin.Context) {
+func (h *TagsHandler) GetList(c *gin.Context) {
 	tags, _ := h.getter.GetAll()
 	c.JSON(http.StatusOK, gin.H{
 		"entries": tags,
@@ -20,6 +20,6 @@ func (h *TagsHander) GetList(c *gin.Context) {
 }
 
 // NewTagsHandler returns a new router object
-func NewTagsHandler(getter TagsGetter) *TagsHander {
-	return &TagsHander{getter: getter}
+func NewTagsHandler(getter TagsGetter) *TagsHandler {
+	return &TagsHandler{getter: getter}
 }

@@ -58,7 +58,7 @@ func (l *Logger) Fatalf(format string, args ...interface{}) {
 func NewLogger() *Logger {
 	log := logrus.New()
 	config := NewConfig()
-	perm := 0600
+	perm := 0o600
 	file, err := os.OpenFile(
 		config.FilePath,
 		os.O_APPEND|os.O_CREATE|os.O_WRONLY,

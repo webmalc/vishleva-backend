@@ -9,24 +9,24 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestAuthHander_GetLogin(t *testing.T) {
+func TestAuthHandler_GetLogin(t *testing.T) {
 	w, engine := initRoutes()
-	req, _ := http.NewRequest("GET", "/auth/login", nil)
+	req, _ := http.NewRequest("GET", "/auth/login", http.NoBody)
 	engine.ServeHTTP(w, req)
 	assert.Equal(t, 200, w.Code)
 	assert.Contains(t, w.Body.String(), "Sing in")
 }
 
-func TestAuthHander_PostLogin(t *testing.T) {
+func TestAuthHandler_PostLogin(t *testing.T) {
 	w, engine := initRoutes()
-	req, _ := http.NewRequest("POST", "/auth/login", nil)
+	req, _ := http.NewRequest("POST", "/auth/login", http.NoBody)
 	engine.ServeHTTP(w, req)
 	assert.Equal(t, 303, w.Code)
 }
 
-func TestAuthHander_GetLogout(t *testing.T) {
+func TestAuthHandler_GetLogout(t *testing.T) {
 	w, engine := initRoutes()
-	req, _ := http.NewRequest("GET", "/auth/logout", nil)
+	req, _ := http.NewRequest("GET", "/auth/logout", http.NoBody)
 	engine.ServeHTTP(w, req)
 	assert.Equal(t, 303, w.Code)
 }

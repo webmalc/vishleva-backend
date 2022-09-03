@@ -10,13 +10,13 @@ import (
 )
 
 func TestRouter_mountAdmin(t *testing.T) {
-	h := &mocks.AuthHander{}
-	ta := &mocks.ListHander{}
-	tg := &mocks.ListHander{}
-	rg := &mocks.ListHander{}
-	ch := &mocks.ListHander{}
-	ih := &mocks.ListHander{}
-	ca := &mocks.ListHander{}
+	h := &mocks.AuthHandler{}
+	ta := &mocks.ListHandler{}
+	tg := &mocks.ListHandler{}
+	rg := &mocks.ListHandler{}
+	ch := &mocks.ListHandler{}
+	ih := &mocks.ListHandler{}
+	ca := &mocks.ListHandler{}
 	a := &mocks.Admin{}
 	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
 	e := gin.Default()
@@ -27,14 +27,14 @@ func TestRouter_mountAdmin(t *testing.T) {
 }
 
 func TestRouter_BindRoutes(t *testing.T) {
-	h := &mocks.AuthHander{}
+	h := &mocks.AuthHandler{}
 	a := &mocks.Admin{}
-	ta := &mocks.ListHander{}
-	tg := &mocks.ListHander{}
-	rg := &mocks.ListHander{}
-	ch := &mocks.ListHander{}
-	ih := &mocks.ListHander{}
-	ca := &mocks.ListHander{}
+	ta := &mocks.ListHandler{}
+	tg := &mocks.ListHandler{}
+	rg := &mocks.ListHandler{}
+	ch := &mocks.ListHandler{}
+	ih := &mocks.ListHandler{}
+	ca := &mocks.ListHandler{}
 	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
@@ -45,14 +45,14 @@ func TestRouter_BindRoutes(t *testing.T) {
 }
 
 func TestNewRouter(t *testing.T) {
-	h := &mocks.AuthHander{}
+	h := &mocks.AuthHandler{}
 	a := &mocks.Admin{}
-	ta := &mocks.ListHander{}
-	tg := &mocks.ListHander{}
-	rg := &mocks.ListHander{}
-	ch := &mocks.ListHander{}
-	ih := &mocks.ListHander{}
-	ca := &mocks.ListHander{}
+	ta := &mocks.ListHandler{}
+	tg := &mocks.ListHandler{}
+	rg := &mocks.ListHandler{}
+	ch := &mocks.ListHandler{}
+	ih := &mocks.ListHandler{}
+	ca := &mocks.ListHandler{}
 	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
 
 	assert.Equal(t, r.auth, h)

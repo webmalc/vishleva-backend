@@ -42,47 +42,69 @@ linters-settings:
 linters:
   disable-all: true
   enable:
+    # - contextcheck
+    # - exhaustruct
+    - asasalint
+    - asciicheck
+    - bidichk
     - bodyclose
-    - deadcode
+    - containedctx
+    - cyclop
+    - decorder
     - depguard
     - dogsled
     - dupl
+    - durationcheck
     - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - execinquery
+    - exportloopref
+    - forbidigo
+    - forcetypeassert
     - funlen
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
     - goconst
     - gocritic
     - gocyclo
+    - godot
+    - godox
+    - goerr113
     - gofmt
     - goimports
-    - golint
     - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
+    - govet
+    - grouper
     - ineffassign
-    - interfacer
+    - interfacebloat
+    - ireturn
     - lll
     - misspell
     - nakedret
+    - nestif
+    - nilnil
+    - nlreturn
+    - noctx
+    - nonamedreturns
+    - predeclared
+    - revive
     - rowserrcheck
-    - scopelint
+    - sqlclosecheck
     - staticcheck
-    - structcheck
     - stylecheck
     - typecheck
     - unconvert
     - unparam
     - unused
-    - varcheck
+    - wastedassign
     - whitespace
-    - godox
-    - maligned
-    - gocognit
-    - gochecknoglobals
-    - gochecknoinits
-    # - prealloc
-    # - wsl
 
 issues:
   # Excluding configuration per-path, per-linter, per-text and per-source
@@ -101,10 +123,21 @@ issues:
         - goconst
         - golint
         - gosimple
+        - cyclop
+        - forbidigo
+        - goerr113
+        - ireturn
+        - nlreturn
+        - nestif
+        - nonamedreturns
     - path: _test\.go
       linters:
         - gomnd
         - dupl
+        - noctx
+    - path: .*mocks.*
+      linters:
+        - forcetypeassert
     - path: app_test\.go
       linters:
         - gomnd

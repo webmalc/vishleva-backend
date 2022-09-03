@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestReviewsHander_GetList(t *testing.T) {
+func TestReviewsHandler_GetList(t *testing.T) {
 	checkResponse(t, "/api/reviews", 1)
 }
 

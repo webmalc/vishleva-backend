@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestImagesHander_GetList(t *testing.T) {
+func TestImagesHandler_GetList(t *testing.T) {
 	checkResponse(t, "/api/images", 2)
 }
 

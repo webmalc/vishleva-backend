@@ -7,7 +7,7 @@ import (
 	"github.com/webmalc/vishleva-backend/handlers/mocks"
 )
 
-func TestCalendarHander_GetList(t *testing.T) {
+func TestCalendarHandler_GetList(t *testing.T) {
 	checkResponse(t, "/api/calendar", 7)
 }
 
