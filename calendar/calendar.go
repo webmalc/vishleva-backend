@@ -6,7 +6,6 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
-// TODO: test it
 // Generator is the calendar generator.
 type Generator struct {
 	Begin               time.Time
