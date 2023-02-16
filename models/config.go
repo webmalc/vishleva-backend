@@ -13,6 +13,7 @@ type Config struct {
 	ImageBigWidth     int
 	ImageBigHeight    int
 	OrderStatuses     []string
+	PhoneCode         int
 }
 
 // setDefaults sets the default values.
@@ -23,6 +24,7 @@ func setDefaults() {
 	viper.SetDefault("image_middle_height", 108) // nolint // unnecessary: unparam
 	viper.SetDefault("image_big_width", 144)     // nolint // unnecessary: unparam
 	viper.SetDefault("image_big_height", 144)    // nolint // unnecessary: unparam
+	viper.SetDefault("phone_code", 7)            // nolint // unnecessary: unparam
 }
 
 // NewConfig returns the configuration object.
@@ -36,6 +38,7 @@ func NewConfig() *Config {
 		ImageBigWidth:     viper.GetInt("image_big_width"),
 		ImageBigHeight:    viper.GetInt("image_big_height"),
 		OrderStatuses:     viper.GetStringSlice("order_statuses"),
+		PhoneCode:         viper.GetInt("phone_code"),
 	}
 
 	return config

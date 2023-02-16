@@ -17,7 +17,7 @@ type Tariff struct {
 	Name         string          `gorm:"size:255;not null;index;unique" valid:"required"`
 	Price        decimal.Decimal `sql:"type:decimal(20,2);" gorm:";not null;" valid:"required"`
 	Duration     int             `gorm:";not null;" valid:"required"`
-	Photos       int             `gorm:";not null;" valid:"required;duck"`
+	Photos       int             `gorm:";not null;" valid:"required"`
 	Retouch      int             `gorm:";not null;" valid:"required"`
 	RetouchPrice decimal.Decimal `sql:"type:decimal(20,2);" gorm:";not null;" valid:"required"`
 	Description  string          `gorm:"type:text; index" json:"description"`
@@ -39,7 +39,7 @@ func (t *Tariff) Validate(db *gorm.DB) {
 	}
 }
 
-// MarshalJSON returns the JSON respresentation.
+// MarshalJSON returns the JSON representation.
 func (t *Tariff) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
 		Name         string `json:"name"`

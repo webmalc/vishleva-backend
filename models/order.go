@@ -9,6 +9,8 @@ import (
 	"github.com/webmalc/vishleva-backend/services"
 )
 
+// TODO: source field
+
 // Order is a model.
 type Order struct {
 	gorm.Model

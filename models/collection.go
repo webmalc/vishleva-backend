@@ -20,7 +20,7 @@ type Collection struct {
 	Image       Image `gorm:"constraint:OnDelete:SET NULL;default:null"`
 }
 
-// MarshalJSON returns the JSON respresentation.
+// MarshalJSON returns the JSON representation.
 func (t *Collection) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
 		ID          uint   `json:"id"`

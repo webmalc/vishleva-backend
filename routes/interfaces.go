@@ -23,3 +23,8 @@ type AuthHandler interface {
 type ListHandler interface {
 	GetList(c *gin.Context)
 }
+
+// PostHandler is the handler interface.
+type PostHandler interface {
+	Post(c *gin.Context)
+}

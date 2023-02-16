@@ -42,6 +42,7 @@ func main() {
 		handlers.NewCollectionHandler(collectionsRepository),
 		handlers.NewImagesHandler(imagesRepository),
 		handlers.NewCalendarHandler(cal),
+		handlers.NewBookHandler(),
 	)
 	httpServer := server.NewServer(router, log, sessionConfig)
 	defer conn.Close()

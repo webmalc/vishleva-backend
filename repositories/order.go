@@ -12,6 +12,8 @@ type OrderRepository struct {
 	db *gorm.DB
 }
 
+// TODO: createOnlineOrder
+
 // GetAll returns all entries.
 func (r *OrderRepository) GetUpcoming() ([]models.Order, []error) {
 	orders := []models.Order{}

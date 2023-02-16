@@ -20,6 +20,7 @@ type Router struct {
 	collections ListHandler
 	images      ListHandler
 	calendar    ListHandler
+	book        PostHandler
 	cacheStore  *persistence.InMemoryStore
 }
 
@@ -44,6 +45,8 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	auth.POST("/login", r.auth.PostLogin)
 	auth.GET("/logout", r.auth.GetLogout)
 
+	// TODO: book route -> book handler -> service (check cal, create, notify) -> repo
+
 	// api routes
 	api := e.Group("api")
 	api.GET("/tariffs", cache.CachePage(
@@ -63,6 +66,8 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	))
 	api.GET("/calendar", r.calendar.GetList)
 
+	api.POST("/book", r.book.Post)
+
 	// cache
 	api.GET("/cache", func(c *gin.Context) {
 		r.cacheStore.Flush()
@@ -79,6 +84,7 @@ func NewRouter(
 	collections ListHandler,
 	images ListHandler,
 	calendar ListHandler,
+	book PostHandler,
 ) *Router {
 	config := NewConfig()
 
@@ -92,6 +98,7 @@ func NewRouter(
 		collections: collections,
 		images:      images,
 		calendar:    calendar,
+		book:        book,
 		cacheStore:  persistence.NewInMemoryStore(config.CacheTimeout),
 	}
 }
