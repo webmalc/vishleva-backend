@@ -38,6 +38,7 @@ type OrdersAvailabilitySetter struct {
 	format      string
 }
 
+// Init initializes the struct.
 func (s *OrdersAvailabilitySetter) Init() {
 	orders, _ := s.getter.GetUpcoming()
 	for i := range orders {
@@ -66,7 +67,7 @@ func (s *OrdersAvailabilitySetter) Set(slot *models.CalendarSlot) {
 	}
 }
 
-// NewWorkingHoursAvailabilitySetter return a new object.
+// NewOrdersAvailabilitySetter return a new object.
 func NewOrdersAvailabilitySetter(
 	getter OrdersGetter,
 ) *OrdersAvailabilitySetter {

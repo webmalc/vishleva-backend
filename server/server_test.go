@@ -19,6 +19,7 @@ import (
 	"github.com/webmalc/vishleva-backend/repositories"
 	"github.com/webmalc/vishleva-backend/routes"
 	"github.com/webmalc/vishleva-backend/server/mocks"
+	"github.com/webmalc/vishleva-backend/services"
 )
 
 // Should init the logger.
@@ -89,6 +90,13 @@ func TestServer_Run(t *testing.T) {
 		handlers.NewCollectionHandler(cr),
 		handlers.NewImagesHandler(ir),
 		handlers.NewCalendarHandler(cal),
+		handlers.NewBookHandler(
+			services.NewBookingService(
+				l,
+				repositories.NewClientRepository(conn.DB),
+				or,
+			),
+		),
 	)
 	server := NewServer(r, l, s)
 	ctx, cancel := context.WithCancel(context.Background())

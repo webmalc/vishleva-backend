@@ -21,9 +21,9 @@ jobs:
         run: |
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.41.1
           sudo cp bin/golangci-lint /usr/local/bin/golangci-lint
-          go get -u github.com/klmitch/overcover
-          go get -u -f github.com/qor/bindatafs/...
-          go get -u golang.org/x/lint/golint
+          go install -u github.com/klmitch/overcover
+          go install -u -f github.com/qor/bindatafs/...
+          go install -u golang.org/x/lint/golint
           npm install -g codeclimate-test-reporter
 
       - name: Check out code into the Go module directory

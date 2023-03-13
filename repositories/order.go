@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/shopspring/decimal"
 	"github.com/webmalc/vishleva-backend/models"
 )
 
@@ -12,9 +13,27 @@ type OrderRepository struct {
 	db *gorm.DB
 }
 
-// TODO: createOnlineOrder
+// CreateOnlineOrder creates online order.
+func (r *OrderRepository) CreateOnlineOrder(
+	name, comment string, begin, end *time.Time, client *models.Client,
+) (*models.Order, error) {
+	order := models.Order{
+		Name:    name,
+		Begin:   begin,
+		End:     end,
+		Comment: comment,
+		Total:   decimal.NewFromInt(0),
+		Paid:    decimal.NewFromInt(0),
+		Client:  *client,
+		Status:  "not_confirmed",
+		Source:  "online",
+	}
+	err := r.db.Create(&order).Error
 
-// GetAll returns all entries.
+	return &order, err
+}
+
+// GetUpcoming returns all entries.
 func (r *OrderRepository) GetUpcoming() ([]models.Order, []error) {
 	orders := []models.Order{}
 	d := time.Now()

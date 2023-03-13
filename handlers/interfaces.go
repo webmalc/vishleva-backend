@@ -3,6 +3,7 @@ package handlers
 import (
 	"time"
 
+	"github.com/webmalc/vishleva-backend/dto"
 	"github.com/webmalc/vishleva-backend/models"
 )
 
@@ -44,4 +45,9 @@ type ImagesGetter interface {
 // CalendarGenerator gets entries.
 type CalendarGenerator interface {
 	Get(begin time.Time) []*models.CalendarDay
+}
+
+// Booker books orders.
+type Booker interface {
+	Book(*dto.Book) (*models.Order, error)
 }

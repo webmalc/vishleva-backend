@@ -20,6 +20,7 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 	"github.com/webmalc/vishleva-backend/repositories"
 	"github.com/webmalc/vishleva-backend/routes"
+	"github.com/webmalc/vishleva-backend/services"
 )
 
 func createImages(conn *db.Database) {
@@ -102,6 +103,13 @@ func initRoutes() (*httptest.ResponseRecorder, *gin.Engine) {
 		NewCollectionHandler(collectionsRepository),
 		NewImagesHandler(imagesRepository),
 		NewCalendarHandler(cal),
+		NewBookHandler(
+			services.NewBookingService(
+				log,
+				repositories.NewClientRepository(conn.DB),
+				orderRepository,
+			),
+		),
 	)
 
 	engine := gin.Default()

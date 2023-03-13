@@ -6,10 +6,8 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/shopspring/decimal"
-	"github.com/webmalc/vishleva-backend/services"
+	"github.com/webmalc/vishleva-backend/utils"
 )
-
-// TODO: source field
 
 // Order is a model.
 type Order struct {
@@ -23,6 +21,7 @@ type Order struct {
 	ClientID uint            `gorm:"type:bigint;index;not null"`
 	Client   Client          `gorm:"constraint:OnDelete:RESTRICT;not null"`
 	Status   string          `gorm:"index;not null;default:'not_confirmed'" valid:"required"`
+	Source   string          `gorm:"index;not null;default:'manual'" valid:"required"`
 }
 
 // Validate validates the client.
@@ -33,10 +32,13 @@ func (t *Order) Validate(db *gorm.DB) {
 			"the begin is equal or greater than the end",
 		))
 	}
-	services.IsPositiveValidator(t.Total, "total", db)
-	services.IsPositiveValidator(t.Paid, "paid", db)
-	if _, ok := services.StringInSlice(t.Status, c.OrderStatuses); !ok {
+	utils.IsPositiveValidator(t.Total, "total", db)
+	utils.IsPositiveValidator(t.Paid, "paid", db)
+	if _, ok := utils.StringInSlice(t.Status, c.OrderStatuses); !ok {
 		_ = db.AddError(errors.New("status is invalid"))
+	}
+	if _, ok := utils.StringInSlice(t.Source, c.OrderSources); !ok {
+		_ = db.AddError(errors.New("source is invalid"))
 	}
 
 	if t.Status != "open" {

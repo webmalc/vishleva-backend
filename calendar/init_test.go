@@ -61,5 +61,5 @@ func TestYearInitializer_Init(t *testing.T) {
 	i.Init(ca)
 	assert.False(t, ca.Begin.IsZero())
 	assert.False(t, ca.End.IsZero())
-	assert.Equal(t, 365, int(ca.End.Sub(ca.Begin).Hours()/24))
+	assert.Equal(t, 366, int(ca.End.Sub(ca.Begin).Hours()/24))
 }

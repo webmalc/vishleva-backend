@@ -3,7 +3,7 @@ package admin
 import (
 	"github.com/qor/admin"
 	"github.com/webmalc/vishleva-backend/models"
-	"github.com/webmalc/vishleva-backend/services"
+	"github.com/webmalc/vishleva-backend/utils"
 )
 
 type orderResource struct {
@@ -30,7 +30,7 @@ func (r *orderResource) initClient(a *admin.Admin) {
 	)
 	client.Filter(&admin.Filter{
 		Name:    "CreatedAt",
-		Handler: services.GetDateFilter("clients", "created_at"),
+		Handler: utils.GetDateFilter("clients", "created_at"),
 	})
 	r.client = client
 }
@@ -41,7 +41,7 @@ func (r *orderResource) init(a *admin.Admin) {
 	order := a.AddResource(&models.Order{})
 	order.IndexAttrs(
 		"ID", "Name", "Client", "Begin", "End", "Total",
-		"Paid", "Status", "CreatedAt", "UpdatedAt",
+		"Paid", "Status", "Source", "CreatedAt", "UpdatedAt",
 	)
 	order.NewAttrs("-CreatedAt", "-UpdatedAt")
 	order.EditAttrs("-CreatedAt", "-UpdatedAt")
@@ -58,6 +58,11 @@ func (r *orderResource) init(a *admin.Admin) {
 			Collection: r.config.OrderStatuses,
 		}})
 	order.Meta(&admin.Meta{
+		Name: "Source",
+		Config: &admin.SelectOneConfig{
+			Collection: r.config.OrderSources,
+		}})
+	order.Meta(&admin.Meta{
 		Name: "Client",
 		Config: &admin.SelectOneConfig{
 			SelectMode:         "bottom_sheet",
@@ -68,13 +73,14 @@ func (r *orderResource) init(a *admin.Admin) {
 	order.Filter(&admin.Filter{Name: "Begin"})
 	order.Filter(&admin.Filter{Name: "End"})
 	order.Filter(&admin.Filter{Name: "Status"})
+	order.Filter(&admin.Filter{Name: "Source"})
 	order.Filter(&admin.Filter{Name: "Client"})
 	order.Filter(&admin.Filter{
 		Name:    "CreatedAt",
-		Handler: services.GetDateFilter("orders", "created_at"),
+		Handler: utils.GetDateFilter("orders", "created_at"),
 	})
 	order.Filter(&admin.Filter{
 		Name:    "UpdatedAt",
-		Handler: services.GetDateFilter("orders", "updated_at"),
+		Handler: utils.GetDateFilter("orders", "updated_at"),
 	})
 }

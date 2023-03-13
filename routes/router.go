@@ -45,8 +45,6 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	auth.POST("/login", r.auth.PostLogin)
 	auth.GET("/logout", r.auth.GetLogout)
 
-	// TODO: book route -> book handler -> service (check cal, create, notify) -> repo
-
 	// api routes
 	api := e.Group("api")
 	api.GET("/tariffs", cache.CachePage(

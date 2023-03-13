@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/webmalc/vishleva-backend/services"
+	"github.com/webmalc/vishleva-backend/utils"
 )
 
 // User is the user struct.
@@ -17,7 +17,7 @@ type User struct {
 
 // SetPassword hashes and sets the provided password.
 func (u *User) SetPassword(newPwd string) error {
-	pwd, err := services.HashPassword([]byte(newPwd))
+	pwd, err := utils.HashPassword([]byte(newPwd))
 	if err != nil {
 		return err
 	}

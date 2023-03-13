@@ -22,6 +22,6 @@ func Migrate(migrater AutoMigrater) {
 		"image_id", "images(id)", "SET NULL", "CASCADE",
 	)
 	migrater.Model(&Collection{}).AddForeignKey(
-		"client_id", "clients(id)", "SET NULL", "CASCADE",
+		"image_id", "clients(id)", "SET NULL", "CASCADE",
 	)
 }

@@ -20,6 +20,7 @@ func TestOrder_Validate(t *testing.T) {
 		Total:  decimal.NewFromInt(100),
 		Paid:   decimal.NewFromInt(50),
 		Status: "open",
+		Source: "manual",
 	}
 	order.Validate(conn.DB)
 	assert.Len(t, conn.GetErrors(), 0)
@@ -50,11 +51,19 @@ func TestOrder_Validate(t *testing.T) {
 	)
 	order.Paid = decimal.NewFromInt(50)
 
-	order.Status = "invalid"
+	order.Status = "invalid status"
 	order.Validate(conn.DB)
 	assert.Len(t, conn.GetErrors(), 4)
 	assert.Contains(
-		t, conn.GetErrors()[3].Error(), "invalid",
+		t, conn.GetErrors()[3].Error(), "status",
+	)
+
+	order.Status = "closed"
+	order.Source = "invalid source"
+	order.Validate(conn.DB)
+	assert.Len(t, conn.GetErrors(), 5)
+	assert.Contains(
+		t, conn.GetErrors()[4].Error(), "source",
 	)
 }
 
@@ -70,6 +79,7 @@ func TestOrder_ValidateOverlapping(t *testing.T) {
 		Total:  decimal.NewFromInt(100),
 		Paid:   decimal.NewFromInt(50),
 		Status: "open",
+		Source: "manual",
 	}
 
 	orderFirst.Validate(conn.DB)
@@ -88,6 +98,7 @@ func TestOrder_ValidateOverlapping(t *testing.T) {
 		Total:  decimal.NewFromInt(100),
 		Paid:   decimal.NewFromInt(50),
 		Status: "open",
+		Source: "manual",
 	}
 
 	orderSecond.Validate(conn.DB)

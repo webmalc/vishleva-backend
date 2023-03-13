@@ -21,7 +21,7 @@ func (h *CalendarHandler) GetList(c *gin.Context) {
 	})
 }
 
-// NewTagsHandler returns a new router object.
+// NewCalendarHandler returns a new router object.
 func NewCalendarHandler(getter CalendarGenerator) *CalendarHandler {
 	return &CalendarHandler{generator: getter}
 }

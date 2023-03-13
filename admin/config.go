@@ -11,6 +11,7 @@ type Config struct {
 	LogoutPath    string
 	SiteName      string
 	OrderStatuses []string
+	OrderSources  []string
 }
 
 // setDefaults sets the default values.
@@ -28,6 +29,7 @@ func NewConfig() *Config {
 		LogoutPath:    viper.GetString("logout_path"),
 		SiteName:      viper.GetString("site_name"),
 		OrderStatuses: viper.GetStringSlice("order_statuses"),
+		OrderSources:  viper.GetStringSlice("order_sources"),
 	}
 
 	return config

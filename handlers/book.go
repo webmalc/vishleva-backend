@@ -1,30 +1,37 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/webmalc/vishleva-backend/dto"
 )
 
-// TODO: test it
 // BookHandler is handler.
-type BookHandler struct{}
+type BookHandler struct {
+	booker Booker
+}
 
 // Post creates a new object.
 func (h *BookHandler) Post(c *gin.Context) {
-	request := dto.Book{}
+	request := dto.Book{
+		Name:       "online order",
+		ClientName: "online client",
+	}
 	if err := c.BindJSON(&request); err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.AbortWithError(http.StatusBadRequest, err) // nolint // unnecessary
+
 		return
 	}
-	// TODO:  run service
-	fmt.Println(request)
-	c.JSON(http.StatusAccepted, &request)
+	if _, err := h.booker.Book(&request); err != nil {
+		c.AbortWithError(http.StatusBadRequest, err) // nolint // unnecessary
+
+		return
+	}
+	c.JSON(http.StatusCreated, &request)
 }
 
 // NewBookHandler returns a new book handler  object.
-func NewBookHandler() *BookHandler {
-	return &BookHandler{}
+func NewBookHandler(booker Booker) *BookHandler {
+	return &BookHandler{booker: booker}
 }

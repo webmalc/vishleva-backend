@@ -55,7 +55,7 @@ func getBaseDir() string {
 	return filepath.Dir(b)
 }
 
-// setTimezone sets timezone.
+// SetTimezone sets timezone.
 func SetTimezone() {
 	loc, _ := time.LoadLocation(viper.GetString("timezone"))
 	time.Local = loc

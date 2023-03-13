@@ -31,7 +31,6 @@ func (t *Client) Validate(db *gorm.DB) {
 		_ = db.AddError(errors.New(
 			"phone must start with " + phoneCode,
 		))
-
 	}
 }
 
