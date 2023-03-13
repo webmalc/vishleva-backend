@@ -17,6 +17,7 @@ import (
 	"github.com/webmalc/vishleva-backend/repositories"
 	"github.com/webmalc/vishleva-backend/routes"
 	"github.com/webmalc/vishleva-backend/server"
+	"github.com/webmalc/vishleva-backend/services"
 )
 
 func main() {
@@ -42,7 +43,13 @@ func main() {
 		handlers.NewCollectionHandler(collectionsRepository),
 		handlers.NewImagesHandler(imagesRepository),
 		handlers.NewCalendarHandler(cal),
-		handlers.NewBookHandler(),
+		handlers.NewBookHandler(
+			services.NewBookingService(
+				log,
+				repositories.NewClientRepository(conn.DB),
+				orderRepository,
+			),
+		),
 	)
 	httpServer := server.NewServer(router, log, sessionConfig)
 	defer conn.Close()

@@ -13,6 +13,7 @@ type Config struct {
 	ImageBigWidth     int
 	ImageBigHeight    int
 	OrderStatuses     []string
+	OrderSources      []string
 	PhoneCode         int
 }
 
@@ -38,6 +39,7 @@ func NewConfig() *Config {
 		ImageBigWidth:     viper.GetInt("image_big_width"),
 		ImageBigHeight:    viper.GetInt("image_big_height"),
 		OrderStatuses:     viper.GetStringSlice("order_statuses"),
+		OrderSources:      viper.GetStringSlice("order_sources"),
 		PhoneCode:         viper.GetInt("phone_code"),
 	}
 

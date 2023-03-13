@@ -66,6 +66,7 @@ func TestGenerator_generateSlots(t *testing.T) {
 		Total:  decimal.NewFromInt(10),
 		Paid:   decimal.NewFromInt(10),
 		Status: "open",
+		Source: "manual",
 	})
 	orders, _ := repo.GetUpcoming()
 

@@ -72,6 +72,7 @@ func TestOrdersAvailabilitySetter_Init(t *testing.T) {
 		Total:  decimal.NewFromInt(10),
 		Paid:   decimal.NewFromInt(10),
 		Status: "open",
+		Source: "manual",
 	})
 
 	setter.Init()
@@ -104,6 +105,7 @@ func TestOrdersAvailabilitySetter_Set(t *testing.T) {
 		Total:  decimal.NewFromInt(10),
 		Paid:   decimal.NewFromInt(10),
 		Status: "open",
+		Source: "manual",
 	})
 
 	setter.Init()

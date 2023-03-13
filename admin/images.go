@@ -6,7 +6,7 @@ import (
 	"github.com/qor/admin"
 	"github.com/qor/qor"
 	"github.com/webmalc/vishleva-backend/models"
-	"github.com/webmalc/vishleva-backend/services"
+	"github.com/webmalc/vishleva-backend/utils"
 )
 
 type imageResource struct {
@@ -96,11 +96,11 @@ func (r *imageResource) init(a *admin.Admin) {
 	})
 	image.Filter(&admin.Filter{
 		Name:    "CreatedAt",
-		Handler: services.GetDateFilter("images", "created_at"),
+		Handler: utils.GetDateFilter("images", "created_at"),
 	})
 	image.Filter(&admin.Filter{
 		Name:    "UpdatedAt",
-		Handler: services.GetDateFilter("images", "updated_at"),
+		Handler: utils.GetDateFilter("images", "updated_at"),
 	})
 
 	batchTags := *image

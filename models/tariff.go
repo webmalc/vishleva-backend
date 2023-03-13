@@ -7,7 +7,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/qor/sorting"
 	"github.com/shopspring/decimal"
-	"github.com/webmalc/vishleva-backend/services"
+	"github.com/webmalc/vishleva-backend/utils"
 )
 
 // Tariff is a model.
@@ -27,11 +27,11 @@ type Tariff struct {
 
 // Validate validates the struct.
 func (t *Tariff) Validate(db *gorm.DB) {
-	services.IsPositiveValidator(t.Price, "price", db)
-	services.IsPositiveValidator(t.Duration, "duration", db)
-	services.IsPositiveValidator(t.Photos, "photos", db)
-	services.IsPositiveValidator(t.Retouch, "retouch", db)
-	services.IsPositiveValidator(t.RetouchPrice, "retouch price", db)
+	utils.IsPositiveValidator(t.Price, "price", db)
+	utils.IsPositiveValidator(t.Duration, "duration", db)
+	utils.IsPositiveValidator(t.Photos, "photos", db)
+	utils.IsPositiveValidator(t.Retouch, "retouch", db)
+	utils.IsPositiveValidator(t.RetouchPrice, "retouch price", db)
 	if t.Retouch > t.Photos {
 		_ = db.AddError(errors.New(
 			"retouch number is greater than the number of photos",

@@ -10,6 +10,9 @@ order_statuses:
   - not_confirmed
   - open
   - closed
+order_sources:
+  - manual
+  - online
 
 #paths
 admin_path: "admin"

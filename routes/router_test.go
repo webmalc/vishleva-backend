@@ -17,8 +17,9 @@ func TestRouter_mountAdmin(t *testing.T) {
 	ch := &mocks.ListHandler{}
 	ih := &mocks.ListHandler{}
 	ca := &mocks.ListHandler{}
+	bo := &mocks.PostHandler{}
 	a := &mocks.Admin{}
-	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
+	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca, bo)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -35,7 +36,8 @@ func TestRouter_BindRoutes(t *testing.T) {
 	ch := &mocks.ListHandler{}
 	ih := &mocks.ListHandler{}
 	ca := &mocks.ListHandler{}
-	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
+	bo := &mocks.PostHandler{}
+	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca, bo)
 	e := gin.Default()
 	a.On("GetBasePath").Return("admin").Once()
 	a.On("Mount").Return(http.NewServeMux()).Once()
@@ -53,7 +55,8 @@ func TestNewRouter(t *testing.T) {
 	ch := &mocks.ListHandler{}
 	ih := &mocks.ListHandler{}
 	ca := &mocks.ListHandler{}
-	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca)
+	bo := &mocks.PostHandler{}
+	r := NewRouter(a, h, ta, tg, rg, ch, ih, ca, bo)
 
 	assert.Equal(t, r.auth, h)
 	assert.Equal(t, r.admin, a)
