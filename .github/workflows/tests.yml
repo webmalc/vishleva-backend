@@ -32,6 +32,7 @@ jobs:
 
       - name: Test
         run: |
+          export CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
           export PATH=$PATH:$(go env GOPATH)/bin
           make testall
           bash <(curl -s https://codecov.io/bash)
