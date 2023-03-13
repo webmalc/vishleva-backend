@@ -3,7 +3,7 @@ module github.com/webmalc/vishleva-backend
 go 1.16
 
 require (
-	github.com/PuerkitoBio/goquery v1.8.1 // indirect
+	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/aws/aws-sdk-go v1.40.15 // indirect
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
@@ -14,18 +14,14 @@ require (
 	github.com/gin-contrib/sessions v0.0.3
 	github.com/gin-contrib/static v0.0.1
 	github.com/gin-gonic/gin v1.7.3
-	github.com/go-critic/go-critic v0.5.7 // indirect
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
-	github.com/go-toolsmith/pkgload v1.0.1 // indirect
 	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/gosimple/slug v1.10.0 // indirect
 	github.com/jinzhu/configor v1.2.1 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jinzhu/now v1.1.2 // indirect
 	github.com/lib/pq v1.10.2 // indirect
-	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
-	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/microcosm-cc/bluemonday v1.0.15 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/pkg/errors v0.9.1
@@ -38,7 +34,6 @@ require (
 	github.com/qor/roles v0.0.0-20201008080147-dcaf8a4646d8 // indirect
 	github.com/qor/sorting v0.0.0-20201215093431-99d91cb78b78
 	github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
-	github.com/quasilyte/regex/syntax v0.0.0-20200805063351-8f842688393c // indirect
 	github.com/shopspring/decimal v1.2.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cast v1.4.0 // indirect
@@ -49,5 +44,6 @@ require (
 	github.com/ugorji/go v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 	golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d // indirect
+	golang.org/x/net v0.7.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
