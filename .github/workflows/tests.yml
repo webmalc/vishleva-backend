@@ -24,7 +24,6 @@ jobs:
           go mod init tests
           go get -u github.com/klmitch/overcover
           go get -u -f github.com/qor/bindatafs/...
-          go get -u golang.org/x/lint/golint
           npm install -g codeclimate-test-reporter
 
       - name: Check out code into the Go module directory
