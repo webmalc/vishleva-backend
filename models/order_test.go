@@ -9,7 +9,7 @@ import (
 	"github.com/webmalc/vishleva-backend/common/db"
 )
 
-func TestOrder_Validate(t *testing.T) {
+func TestOrderValidate(t *testing.T) {
 	conn := db.NewConnection()
 	begin := time.Now()
 	end := begin.Add(time.Hour)
@@ -67,7 +67,39 @@ func TestOrder_Validate(t *testing.T) {
 	)
 }
 
-func TestOrder_ValidateOverlapping(t *testing.T) {
+func TestOrderValidateOnlineDates(t *testing.T) {
+	conn := db.NewConnection()
+	conn.AutoMigrate(&Order{})
+	begin := time.Now().Add(time.Hour * 2)
+	end := begin.Add(time.Hour)
+	order := &Order{
+		Name:   "test",
+		Begin:  &begin,
+		End:    &end,
+		Total:  decimal.NewFromInt(100),
+		Paid:   decimal.NewFromInt(50),
+		Status: "open",
+		Source: "online",
+	}
+	order.Validate(conn.DB)
+	assert.Empty(t, conn.GetErrors())
+
+	begin = time.Now().Add(-time.Hour * 2)
+	end = begin.Add(time.Hour)
+	order.Begin = &begin
+	order.End = &end
+
+	order.Validate(conn.DB)
+	assert.Len(t, conn.GetErrors(), 2)
+	assert.Contains(
+		t, conn.GetErrors()[0].Error(), "begin",
+	)
+	assert.Contains(
+		t, conn.GetErrors()[1].Error(), "end",
+	)
+}
+
+func TestOrderValidateOverlapping(t *testing.T) {
 	conn := db.NewConnection()
 	conn.AutoMigrate(&Order{})
 	begin := time.Now()

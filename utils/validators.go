@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
@@ -26,5 +27,12 @@ func IsPositiveValidator(i interface{}, name string, db *gorm.DB) {
 		}
 	default:
 		panic(fmt.Sprintf("unknown type %T!\n", v))
+	}
+}
+
+// IsDateInFutureValidator checks if date is in the future.
+func IsDateInFutureValidator(t time.Time, name string, db *gorm.DB) {
+	if t.Before(time.Now().Add(time.Hour)) {
+		_ = db.AddError(fmt.Errorf("%s is in the past", name))
 	}
 }

@@ -27,13 +27,24 @@ type Order struct {
 // Validate validates the client.
 func (t *Order) Validate(db *gorm.DB) {
 	c := NewConfig()
+	// check dates
 	if t.Begin.After(*t.End) || t.Begin.Equal(*t.End) {
 		_ = db.AddError(errors.New(
 			"the begin is equal or greater than the end",
 		))
 	}
+
+	// check dates for online orders
+	if t.Source == "online" {
+		utils.IsDateInFutureValidator(*t.Begin, "begin", db)
+		utils.IsDateInFutureValidator(*t.End, "end", db)
+	}
+
+	// check price
 	utils.IsPositiveValidator(t.Total, "total", db)
 	utils.IsPositiveValidator(t.Paid, "paid", db)
+
+	// status and source
 	if _, ok := utils.StringInSlice(t.Status, c.OrderStatuses); !ok {
 		_ = db.AddError(errors.New("status is invalid"))
 	}
@@ -41,10 +52,10 @@ func (t *Order) Validate(db *gorm.DB) {
 		_ = db.AddError(errors.New("source is invalid"))
 	}
 
+	// check overlapping
 	if t.Status != "open" {
 		return
 	}
-	// check overlapping
 	count := 0
 	db.Where(`begin <= ? AND "end" >= ?`, *t.End, *t.Begin).
 		Not("status", []string{"not_confirmed", "closed"}).
