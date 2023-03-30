@@ -4,7 +4,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-// TODO: test it
 // Config is the configuration object.
 type Config struct {
 	Sources []string

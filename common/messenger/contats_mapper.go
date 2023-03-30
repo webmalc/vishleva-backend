@@ -1,6 +1,5 @@
 package messenger
 
-// TODO: test it
 // ContactsMapper maps contacts to the sources.
 type ContactsMapper struct{}
 

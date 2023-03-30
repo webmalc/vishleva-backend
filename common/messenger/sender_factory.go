@@ -1,6 +1,5 @@
 package messenger
 
-// TODO: test it
 // SenderFactory is a factory to create senders.
 type SenderFactory struct{}
 
