@@ -17,7 +17,7 @@ func TestOrderRepository_CreateOnlineOrder(t *testing.T) {
 	clientRepo := NewClientRepository(conn.DB)
 	now := time.Now()
 	begin := time.Date(
-		now.Year(), now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
+		now.Year()+1, now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
 	)
 	end := begin.Add(time.Hour)
 	client, _ := clientRepo.GetOrCreate("t@test.com", "79251112233", "client")

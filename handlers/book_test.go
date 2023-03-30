@@ -20,7 +20,7 @@ func TestBookHandler_Post(t *testing.T) {
 	w, engine := initRoutes()
 	now := time.Now()
 	begin := time.Date(
-		now.Year(), now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
+		now.Year()+1, now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
 	)
 	end := begin.Add(time.Hour)
 	bookDto := &dto.Book{

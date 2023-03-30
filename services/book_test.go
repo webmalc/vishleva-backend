@@ -29,7 +29,7 @@ func TestBookingService_Book(t *testing.T) {
 	)
 	now := time.Now()
 	begin := time.Date(
-		now.Year(), now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
+		now.Year()+1, now.Month(), now.Day(), 16, 0, 0, 0, time.Local,
 	)
 	end := begin.Add(time.Hour)
 
@@ -49,11 +49,12 @@ func TestBookingService_Book(t *testing.T) {
 	assert.Len(t, orders, 0)
 	assert.Len(t, clients, 0)
 
-	// book the first order
+	// // book the first order
 	order, _ := service.Book(bookDto)
 	conn.DB.Find(&orders)
 	conn.DB.Find(&clients)
 
+	assert.NotNil(t, order)
 	assert.Greater(t, order.ID, uint(0))
 	assert.Equal(t, "not_confirmed", order.Status)
 	assert.Equal(t, "online", order.Source)
