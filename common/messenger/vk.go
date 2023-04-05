@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// TODO: add vk sender
 // VkSender is a vk sender.
 type VkSender struct{}
 

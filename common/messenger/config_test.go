@@ -12,6 +12,7 @@ import (
 func TestNewConfig(t *testing.T) {
 	c := NewConfig()
 	assert.Equal(t, viper.GetStringSlice("messenger_sources"), c.Sources)
+	assert.Equal(t, viper.GetInt("messenger_email_port"), 587)
 }
 
 // Setups the tests.

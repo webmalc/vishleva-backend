@@ -12,35 +12,34 @@ import (
 type MessageGetter struct{}
 
 func (m *MessageGetter) GetText() string {
-	return "text"
+	return "text https://ya.ru"
 }
 func (m *MessageGetter) GetHTML() string {
-	return "html"
+	return "<p>Hello World!!</p>"
 }
 func (m *MessageGetter) GetSubject() string {
-	return "subject"
+	return "Test message!"
 }
 
 type ContactsGetter struct{}
 
 func (c *ContactsGetter) GetEmail() string {
-	return "email"
+	return "m@webmalc.pw"
 }
 func (c *ContactsGetter) GetTelegram() string {
-	return "telegram"
+	return "-1001653771918"
 }
 func (c *ContactsGetter) GetVK() string {
 	return "vk"
 }
 
 func main() {
-
 	config.Setup()
 	log := logger.NewLogger()
 	m := messenger.NewMessenger(log)
 	c := &ContactsGetter{}
 	mg := &MessageGetter{}
-	m.Send(c, mg)
+	m.Send(c, mg, "telegram")
 
 	// config.Setup()
 	// log := logger.NewLogger()
@@ -78,7 +77,6 @@ func main() {
 	// 	log,
 	// 	httpServer,
 	// 	bindatafs.NewGenerator(),
-
 	// )
 	// cmdRouter.Run()
 }

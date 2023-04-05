@@ -1,5 +1,11 @@
 package messenger
 
+import (
+	"gopkg.in/gomail.v2"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+)
+
 // ContactsGetter is the interface for contacts.
 type ContactsGetter interface {
 	GetEmail() string
@@ -19,12 +25,23 @@ type Sender interface {
 	Send(id string, message MessageGetter, ch chan error)
 }
 
-// ErrorLogger logs errors.
-type ErrorLogger interface {
+// Logger logs errors.
+type Logger interface {
 	Error(args ...interface{})
+	Infof(format string, args ...interface{})
 }
 
 // ContactsConverter is the interface for converting contacts to map.
 type ContactsConverter interface {
 	Convert(contact ContactsGetter) map[string]string
+}
+
+// Dialer is the interface for dialing.
+type EmailDialer interface {
+	DialAndSend(m ...*gomail.Message) error
+}
+
+// TelegramBotSender is the interface for sending telegram messages.
+type TelegramBotSender interface {
+	Send(c tgbotapi.Chattable) (tgbotapi.Message, error)
 }
