@@ -30,7 +30,8 @@ func (c *ContactsGetter) GetTelegram() string {
 	return "-1001653771918"
 }
 func (c *ContactsGetter) GetVK() string {
-	return "vk"
+	return "720244419"
+	// return "4429612"
 }
 
 func main() {
@@ -39,7 +40,7 @@ func main() {
 	m := messenger.NewMessenger(log)
 	c := &ContactsGetter{}
 	mg := &MessageGetter{}
-	m.Send(c, mg, "telegram")
+	m.Send(c, mg, "vk")
 
 	// config.Setup()
 	// log := logger.NewLogger()

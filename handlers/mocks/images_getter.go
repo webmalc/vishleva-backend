@@ -12,7 +12,7 @@ type ImagesGetter struct {
 
 // GetAll is method mock.
 func (m *ImagesGetter) GetAll(
-	tag string, collectionID uint,
+	_ string, _ uint,
 ) ([]models.Image, []error) {
 	arg := m.Called()
 

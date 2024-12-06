@@ -1,4 +1,3 @@
-# Go parameters
 .PHONY:  testall test testl testv coverage threshold lint run depgraph install_admin server install_air
 GOCMD=go
 GOBUILD=$(GOCMD) build

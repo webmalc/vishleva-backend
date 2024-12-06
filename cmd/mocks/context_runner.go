@@ -12,6 +12,6 @@ type ContextRunner struct {
 }
 
 // Run is method mock.
-func (r *ContextRunner) Run(ctx context.Context, names []string) {
+func (r *ContextRunner) Run(_ context.Context, names []string) {
 	r.Called(names)
 }

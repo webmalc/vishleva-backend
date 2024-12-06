@@ -3,6 +3,7 @@ module github.com/webmalc/vishleva-backend
 go 1.16
 
 require (
+	github.com/SevereCloud/vksdk/v2 v2.16.1
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/aws/aws-sdk-go v1.40.15 // indirect
 	github.com/bitly/go-simplejson v0.5.0
@@ -40,8 +41,7 @@ require (
 	github.com/spf13/cast v1.4.0 // indirect
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
-	github.com/stretchr/objx v0.3.0 // indirect
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.8.1
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/ugorji/go v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519

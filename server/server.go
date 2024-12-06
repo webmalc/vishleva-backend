@@ -67,7 +67,7 @@ func (s *Server) setEngine() {
 }
 
 // Run runs the server.
-func (s *Server) Run(ctx context.Context, args []string) {
+func (s *Server) Run(ctx context.Context, _ []string) {
 	s.setEngine()
 	httpServer := &http.Server{
 		Addr: fmt.Sprintf(

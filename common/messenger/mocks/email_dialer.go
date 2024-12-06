@@ -11,7 +11,7 @@ type EmailDialer struct {
 }
 
 // DialAndSend is method mock.
-func (s *EmailDialer) DialAndSend(m ...*gomail.Message) error {
+func (s *EmailDialer) DialAndSend(_ ...*gomail.Message) error {
 	arg := s.Called()
 
 	return arg.Get(0).(error)

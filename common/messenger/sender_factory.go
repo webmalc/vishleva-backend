@@ -10,7 +10,7 @@ func (s *SenderFactory) New(id string, config *Config) Sender { // nolint // unn
 	case "telegram":
 		return NewTelegramSender(config)
 	case "vk":
-		return NewVkSender()
+		return NewVkSender(config)
 	default:
 		panic("SenderFactory: unknown sender")
 	}

@@ -24,3 +24,4 @@ messenger_email_port: 587
 messenger_email_login: "test@host.com"
 messenger_email_password: "password"
 messenger_telegram_token: "token"
+messenger_vk_token: "token"

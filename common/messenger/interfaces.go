@@ -3,6 +3,7 @@ package messenger
 import (
 	"gopkg.in/gomail.v2"
 
+	"github.com/SevereCloud/vksdk/v2/api"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
@@ -44,4 +45,8 @@ type EmailDialer interface {
 // TelegramBotSender is the interface for sending telegram messages.
 type TelegramBotSender interface {
 	Send(c tgbotapi.Chattable) (tgbotapi.Message, error)
+}
+
+type VkAPISender interface {
+	MessagesSend(b api.Params) (response int, err error)
 }

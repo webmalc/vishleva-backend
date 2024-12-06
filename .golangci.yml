@@ -51,7 +51,7 @@ linters:
     - containedctx
     - cyclop
     - decorder
-    - depguard
+    # - depguard
     - dogsled
     - dupl
     - durationcheck

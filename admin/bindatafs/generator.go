@@ -11,7 +11,7 @@ import (
 type Generator struct{}
 
 // Run runs the generator.
-func (g *Generator) Run(args []string) {
+func (g *Generator) Run(_ []string) {
 	assetFS := AssetFS.NameSpace("admin")
 
 	// Register view paths into AssetFS

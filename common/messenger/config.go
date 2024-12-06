@@ -13,6 +13,7 @@ type Config struct {
 	EmailLogin    string
 	EmailPassword string
 	TelegramToken string
+	VkToken       string
 }
 
 // setDefaults sets the default values.
@@ -32,6 +33,7 @@ func NewConfig() *Config {
 		EmailLogin:    viper.GetString("messenger_email_login"),
 		EmailPassword: viper.GetString("messenger_email_password"),
 		TelegramToken: viper.GetString("messenger_telegram_token"),
+		VkToken:       viper.GetString("messenger_vk_token"),
 	}
 
 	return config

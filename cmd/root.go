@@ -17,12 +17,12 @@ type CommandRouter struct {
 }
 
 // admin runs the server.
-func (r *CommandRouter) server(cmd *cobra.Command, args []string) {
+func (r *CommandRouter) server(_ *cobra.Command, args []string) {
 	r.serverRunner.Run(context.Background(), args)
 }
 
 // bindatafs runs the bindatafs generator.
-func (r *CommandRouter) bindatafs(cmd *cobra.Command, args []string) {
+func (r *CommandRouter) bindatafs(_ *cobra.Command, args []string) {
 	r.bindatafsRunner.Run(args)
 }
 
