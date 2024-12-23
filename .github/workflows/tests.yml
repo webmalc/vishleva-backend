@@ -19,7 +19,7 @@ jobs:
 
       - name: Install environments
         run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.51.1
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.62.2
           sudo cp bin/golangci-lint /usr/local/bin/golangci-lint
           go install github.com/klmitch/overcover@latest
           go install github.com/qor/bindatafs@latest
