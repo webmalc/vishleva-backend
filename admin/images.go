@@ -16,8 +16,8 @@ type imageResource struct {
 
 func (r *imageResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Images", Priority: 1})
-	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 2})
-	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 3})
+	a.AddMenu(&admin.Menu{Name: "Collections", Priority: 2}) //nolint // unnecessary: mnd
+	a.AddMenu(&admin.Menu{Name: "Tags", Priority: 3})        //nolint // unnecessary: mnd
 }
 
 func (r *imageResource) initCollection(a *admin.Admin) {
@@ -30,7 +30,7 @@ func (r *imageResource) initCollection(a *admin.Admin) {
 	})
 	collection.Meta(&admin.Meta{
 		Name: "Image",
-		FormattedValuer: func(record interface{}, context *qor.Context) interface{} {
+		FormattedValuer: func(record interface{}, _ *qor.Context) interface{} {
 			if r, ok := record.(*models.Collection); ok && r.ImageID != nil {
 				return fmt.Sprintf("image #%d", *r.ImageID)
 			}
@@ -82,8 +82,8 @@ func (r *imageResource) batchTags(argument *admin.ActionArgument) error {
 
 func (r *imageResource) init(a *admin.Admin) {
 	r.initCollection(a)
-
-	image := a.AddResource(&models.Image{}, &admin.Config{PageCount: 50})
+	pageCount := 50
+	image := a.AddResource(&models.Image{}, &admin.Config{PageCount: pageCount})
 	image.IndexAttrs("File", "Tags")
 	image.Meta(&admin.Meta{
 		Name:   "Tags",

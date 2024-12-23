@@ -15,7 +15,8 @@ func (g *Generator) Run(_ []string) {
 	assetFS := AssetFS.NameSpace("admin")
 
 	// Register view paths into AssetFS
-	path := os.Getenv("GOPATH") + "/src/github.com/qor/admin/views"
+	path := os.Getenv("GOPATH") + "/pkg/mod/github.com/qor/admin@v1.2.0/views"
+
 	if err := assetFS.RegisterPath(path); err != nil {
 		panic(errors.Wrap(err, "admin"))
 	}

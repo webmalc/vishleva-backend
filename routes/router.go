@@ -67,7 +67,7 @@ func (r *Router) BindRoutes(e *gin.Engine) {
 	api.POST("/book", r.book.Post)
 
 	// cache
-	api.GET("/cache", func(c *gin.Context) {
+	api.GET("/cache", func(_ *gin.Context) {
 		r.cacheStore.Flush()
 	})
 }

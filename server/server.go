@@ -24,7 +24,7 @@ type Server struct {
 	router           Router
 	engine           *gin.Engine
 	session          *session.Session
-	loggerPermission int
+	loggerPermission uint32
 }
 
 // initLogger setups the logger.
@@ -110,7 +110,7 @@ func NewServer(router Router, l InfoLogger, s *session.Session) *Server {
 		logger:           l,
 		router:           router,
 		session:          s,
-		loggerPermission: 0o600,
+		loggerPermission: 0o600, //nolint //unnecessary:mnd
 	}
 
 	return &server

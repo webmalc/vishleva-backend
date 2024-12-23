@@ -8,7 +8,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// TODO: test it
 // VkSender is a vk sender.
 type VkSender struct {
 	config      *Config
@@ -17,7 +16,6 @@ type VkSender struct {
 
 // Send sends message to the user.
 func (s *VkSender) Send(id string, message MessageGetter, ch chan error) {
-
 	userID, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {
 		ch <- errors.Wrap(err, "vk")

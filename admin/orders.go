@@ -13,7 +13,7 @@ type orderResource struct {
 
 func (r *orderResource) initMenu(a *admin.Admin) {
 	a.AddMenu(&admin.Menu{Name: "Orders", Priority: 1})
-	a.AddMenu(&admin.Menu{Name: "Clients", Priority: 2})
+	a.AddMenu(&admin.Menu{Name: "Clients", Priority: 2}) //nolint // unnecessary: mnd
 }
 
 func (r *orderResource) initClient(a *admin.Admin) {

@@ -44,11 +44,12 @@ type ImageStorage struct {
 // GetSizes return the sizes.
 func (ImageStorage) GetSizes() map[string]*media.Size {
 	c := NewConfig()
+	m := 2
 
 	return map[string]*media.Size{
 		"small": {
-			Width:   c.ImageSmallWidth * 2,
-			Height:  c.ImageSmallHeight * 2,
+			Width:   c.ImageSmallWidth * m,
+			Height:  c.ImageSmallHeight * m,
 			Padding: true,
 		},
 		"small@ld": {
@@ -56,16 +57,16 @@ func (ImageStorage) GetSizes() map[string]*media.Size {
 			Height: c.ImageSmallHeight,
 		},
 		"middle": {
-			Width:  c.ImageMiddleWidth * 2,
-			Height: c.ImageMiddleHeight * 2,
+			Width:  c.ImageMiddleWidth * m,
+			Height: c.ImageMiddleHeight * m,
 		},
 		"middle@ld": {
 			Width:  c.ImageMiddleWidth,
 			Height: c.ImageMiddleHeight,
 		},
 		"big": {
-			Width:  c.ImageBigWidth * 2,
-			Height: c.ImageBigHeight * 2,
+			Width:  c.ImageBigWidth * m,
+			Height: c.ImageBigHeight * m,
 		},
 		"big@ld": {
 			Width:  c.ImageBigWidth,

@@ -20,7 +20,7 @@ func (h *ImagesHandler) GetList(c *gin.Context) {
 	}
 	images, _ := h.getter.GetAll(
 		c.Query("tag"),
-		uint(collection),
+		uint(collection), // nolint // unnecessary: G115
 	)
 	c.JSON(http.StatusOK, gin.H{
 		"entries": images,

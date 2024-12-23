@@ -26,7 +26,7 @@ func (u *reviewResource) init(a *admin.Admin) {
 	reviews.IndexAttrs("ID", "Content", "Client", "Image", "IsEnabled")
 	reviews.Meta(&admin.Meta{
 		Name: "Image",
-		FormattedValuer: func(record interface{}, context *qor.Context) interface{} {
+		FormattedValuer: func(record interface{}, _ *qor.Context) interface{} {
 			if r, ok := record.(*models.Review); ok && r.ImageID != nil {
 				return fmt.Sprintf("image #%d", *r.ImageID)
 			}

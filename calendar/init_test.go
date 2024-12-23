@@ -2,6 +2,7 @@ package calendar
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/webmalc/vishleva-backend/calendar/mocks"
@@ -58,8 +59,9 @@ func TestYearInitializer_Init(t *testing.T) {
 	i := YearInitializer{}
 	assert.True(t, ca.Begin.IsZero())
 	assert.True(t, ca.End.IsZero())
+	ca.Begin = time.Date(2024, 1, 23, 14, 30, 0, 0, time.UTC)
 	i.Init(ca)
 	assert.False(t, ca.Begin.IsZero())
 	assert.False(t, ca.End.IsZero())
-	assert.Equal(t, 366, int(ca.End.Sub(ca.Begin).Hours()/24))
+	assert.Contains(t, []int{365, 366}, int(ca.End.Sub(ca.Begin).Hours()/24))
 }

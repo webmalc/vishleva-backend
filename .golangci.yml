@@ -28,7 +28,7 @@ linters-settings:
     local-prefixes: github.com/golangci/golangci-lint
   golint:
     min-confidence: 0
-  gomnd:
+  mnd:
     settings:
       mnd:
         checks: argument,case,condition,return
@@ -59,8 +59,9 @@ linters:
     - errchkjson
     - errname
     - errorlint
-    - execinquery
-    - exportloopref
+    # - execinquery
+    # - exportloopref
+    - copyloopvar
     - forbidigo
     - forcetypeassert
     - funlen
@@ -75,7 +76,8 @@ linters:
     # - goerr113
     - gofmt
     - goimports
-    - gomnd
+    # - gomnd
+    - mnd
     - goprintffuncname
     - gosec
     - gosimple

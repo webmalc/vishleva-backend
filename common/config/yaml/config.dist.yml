@@ -17,11 +17,16 @@ order_sources:
 admin_path: "admin"
 login_path: "/auth/login"
 logout_path: "/auth/logout"
+
 #messenger email
 messenger_email_from: "form@host.com"
 messenger_email_host: "smtp.host.com"
 messenger_email_port: 587
 messenger_email_login: "test@host.com"
 messenger_email_password: "password"
+
+#messenger telegram (BotFather)
 messenger_telegram_token: "token"
+
+#messenger vk (community token. example: https://vk.com/clubXXX?act=tokens)
 messenger_vk_token: "token"
