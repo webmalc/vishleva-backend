@@ -34,13 +34,14 @@ jobs:
           export CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
           export PATH=$PATH:$(go env GOPATH)/bin
           make testall
+          cp coverage.filtered.out coverage.out
           bash <(curl -s https://codecov.io/bash)
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Codebeat
         run: |
-          codeclimate-test-reporter < coverage.out
+          codeclimate-test-reporter < coverage.filtered.out
         env:
           CODECLIMATE_API_HOST: https://codebeat.co/webhooks/code_coverage
           CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
