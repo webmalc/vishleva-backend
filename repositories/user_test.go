@@ -9,6 +9,21 @@ import (
 	"github.com/webmalc/vishleva-backend/models"
 )
 
+func TestUserRepository_CreateUser(t *testing.T) {
+	conn := db.NewConnection()
+	defer conn.Close()
+	models.Migrate(conn)
+	repo := NewUserRepository(conn.DB)
+	user, err := repo.CreateUser("test@test.com", "password")
+	assert.Nil(t, err)
+	assert.Equal(t, "test@test.com", user.Email)
+
+	// check if the password works
+	user, err = repo.LoginAndReturnUser(user.Email, "password")
+	assert.Nil(t, err)
+	assert.Equal(t, "test@test.com", user.Email)
+}
+
 func TestUserRepository_LoginAndReturnUser(t *testing.T) {
 	conn := db.NewConnection()
 	email := "test@test.com"

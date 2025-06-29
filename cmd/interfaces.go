@@ -16,3 +16,8 @@ type Runner interface {
 type ContextRunner interface {
 	Run(ctx context.Context, names []string)
 }
+
+// AdminCreator creates an admin user.
+type AdminCreator interface {
+	CreateAdmin(email, password string) error
+}

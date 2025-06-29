@@ -58,6 +58,7 @@ func main() {
 		log,
 		httpServer,
 		bindatafs.NewGenerator(),
+		services.NewUsersService(log, userRepository),
 	)
 	cmdRouter.Run()
 }

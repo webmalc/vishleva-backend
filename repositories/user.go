@@ -32,6 +32,19 @@ func (r *UserRepository) LoginAndReturnUser(
 	return &u, nil
 }
 
+func (r *UserRepository) CreateUser(
+	email, password string,
+) (*models.User, error) {
+	user := &models.User{Email: email}
+	err := user.SetPassword(password)
+	if err != nil {
+		return user, err
+	}
+	result := r.db.Create(&user)
+
+	return user, result.Error
+}
+
 // NewUserRepository return a new user repository struct.
 func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db: db}

@@ -27,3 +27,8 @@ type OrderBooker interface {
 type AdminNotifier interface {
 	notifyAdmin(subject string, data map[string]string) error
 }
+
+// UserCreator creates a new user.
+type UserCreator interface {
+	CreateUser(email, password string) (*models.User, error)
+}
